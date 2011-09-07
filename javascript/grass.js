@@ -1,9 +1,9 @@
-jj.createLayer('grass', function (layer) {
+jj.createCreature('grass', function (layer) {
   // the div element for the layer.
   var el = layer.el;
   var jq = jj.jQuery;
   // Set the size of your layer.
-  jq(layer).size({ width: '100%', height: '100%'});
+  layer.size({ width: '100%', height: '100%'});
   var w = layer.size().width, 
       h = layer.size().height;
   var rp = Raphael(el[0],w,h);

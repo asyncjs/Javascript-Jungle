@@ -1,4 +1,4 @@
-jj.createLayer("chat", function (layer) {
+jj.createCreature("chat", function (layer) {
     "use strict";
 
     // the div element for the layer.

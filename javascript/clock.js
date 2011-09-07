@@ -1,4 +1,4 @@
-jj.createLayer('clock', function (layer) {
+jj.createCreature('clock', function (layer) {
   var hours = 0, minutes = 0, events = {
     '0':  'midnight',
     '6':  'morning',

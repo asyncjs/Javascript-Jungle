@@ -1,4 +1,4 @@
-jj.createLayer('tree', function (layer) {
+jj.createCreature('tree', function (layer) {
   // the div element for the layer.
   var el = layer.el;
   // Set the size of your layer.

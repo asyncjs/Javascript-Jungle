@@ -1,4 +1,4 @@
-jj.createLayer('creature', function (layer) {
+jj.createCreature('creature', function (layer) {
   var canvas = document.createElement('canvas'),
       context = canvas.getContext('2d'),
       width   = canvas.width  = 100,
@@ -19,6 +19,9 @@ jj.createLayer('creature', function (layer) {
     if (layer.position().top > world.height) {
       layer.position({top: -height});
     }
-    layer.position({top: '+= 5px'});
+    if (layer.position().left > world.width) {
+      layer.position({left: -width});
+    }
+    layer.position({top: '+= 5px', left: '+= 10px'});
   });
 });

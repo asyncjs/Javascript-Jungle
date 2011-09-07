@@ -2,7 +2,7 @@
   var $ = jQuery.noConflict(true),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
-      layers = {}, jj = {}, events = {},
+      creatures = {}, jj = {}, events = {},
       CREATURE_URL_LIST, FRAMERATE;
 
   // The number of frames/second that the "tick" event will fire.
@@ -13,7 +13,7 @@
 
   // Create the global jungle object.
   window.jj = jj = $.extend({}, Events, {
-    // Gets a particular layer by the name or null if not found.
+    // Gets a particular creature by the name or null if not found.
     //
     //   var prem = jj.get('prem');
     //   if (prem) {
@@ -21,17 +21,17 @@
     //   }
     //
     get: function (name) {
-      return layers[name] || null;
+      return creatures[name] || null;
     },
 
-    // Gets a read-only object with copies of all layers.
+    // Gets a read-only object with copies of all creatures.
     //
-    //   $.each(jj.all(), function (layer, name) {
+    //   $.each(jj.all(), function (creature, name) {
     //     console.log("hello " + name);
     //   });
     //
     all: function () {
-      return layers;
+      return creatures;
     },
 
     // Loads args.
@@ -41,28 +41,28 @@
       });
     },
 
-    // Creates a new Layer in the environment. This is the main method that
+    // Creates a new Creature in the environment. This is the main method that
     // will be used to populate the environment.
     //
-    //   jj.createLayer('bill', function (layer) {
-    //     layer.el.size({width: 300, height: 120});
-    //     layer.el.position({top: 20, left: 0});
+    //   jj.createCreature('bill', function (creature) {
+    //     creature.el.size({width: 300, height: 120});
+    //     creature.el.position({top: 20, left: 0});
     //   });
     //
-    createLayer: function (name, callback) {
-      if (layers[name]) {
-        window.console.warn('The layer "%s" already exists!');
+    createCreature: function (name, callback) {
+      if (creatures[name]) {
+        window.console.warn('The creature "%s" already exists!');
         return;
       }
 
-      var element = $('<div class="layer" />').appendTo(jungle),
-          layer   = new Layer(name, element);
+      var element  = $('<div class="creature" data-id="' + name + '" />').appendTo(jungle),
+          creature = new Creature(name, element);
 
-      element.css(jj.size());
+      //element.css(jj.size());
 
       try {
-        callback(layer);
-        layers[name] = layer.readonly();
+        callback(creature);
+        creatures[name] = creature.readonly();
       } catch (error) {
         jj.trigger('crash', name, error);
       }
@@ -72,7 +72,7 @@
     // environment.
     //
     //   var center = jj.center();
-    //   layer.position({width: center.left, height: center.top});
+    //   creature.position({width: center.left, height: center.top});
     //
     center: function () {
       var size = jj.size();
@@ -103,8 +103,8 @@
     jj.bind(n, cb);
   });
   
-  // Create a Layer object.
-  function Layer(name, element) {
+  // Create a Creature object.
+  function Creature(name, element) {
     Events.call(this, {alias: false});
     jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
     this.el = element;
@@ -112,12 +112,12 @@
     this._data = {};
   }
 
-  Layer.prototype = Object.create(Events);
-  $.extend(Layer.prototype, {
+  Creature.prototype = Object.create(Events);
+  $.extend(Creature.prototype, {
     // Reassign the constructor.
-    constructor: Layer,
+    constructor: Creature,
 
-    // Returns the layer name.
+    // Returns the creature name.
     name: function () {
       return this._name;
     },
@@ -125,10 +125,10 @@
     // Allows get/setting of metadata in an object.
     //
     //   // Set yr data here.
-    //   layer.data({foodstuffs: ['Apples', 'Oranges', 'Pears']});
+    //   creature.data({foodstuffs: ['Apples', 'Oranges', 'Pears']});
     //
     //   // Get yr data there.
-    //   layer.data().foodstuffs; //=> {foodstuffs: ['Apples', 'Oranges', 'Pears']}
+    //   creature.data().foodstuffs; //=> {foodstuffs: ['Apples', 'Oranges', 'Pears']}
     //
     data: function (data) {
       if (data) {
@@ -138,14 +138,14 @@
       return this._data;
     },
 
-    // Allows get/setting of layer element width/height. Accepts the same
+    // Allows get/setting of creature element width/height. Accepts the same
     // values as jQuery.width()/jQuery.height().
     //
     //   // Set yr sizes here.
-    //   layer.size({width: 20, height: 40});
+    //   creature.size({width: 20, height: 40});
     //
     //   // Get yr size there.
-    //   layer.size(); //=> {width: 20, height: 40}
+    //   creature.size(); //=> {width: 20, height: 40}
     //
     size: function (size) {
       if (!size) {
@@ -160,14 +160,14 @@
       return this;
     },
 
-    // Allows get/setting of layer element top/left/zIndex. Accepts the same
+    // Allows get/setting of creature element top/left/zIndex. Accepts the same
     // values as jQuery.css() would expect.
     //
     //   // Set yr sizes here.
-    //   layer.position({top: 20, left: 40});
+    //   creature.position({top: 20, left: 40});
     //
     //   // Get yr size there.
-    //   layer.position(); //=> {top: 20, left: 40, zIndex: 0}
+    //   creature.position(); //=> {top: 20, left: 40, zIndex: 0}
     //
     position: function (position) {
       if (!position) {
@@ -179,19 +179,19 @@
       return this;
     },
 
-    // Returns a readonly version of the layer. None of the setters will
+    // Returns a readonly version of the creature. None of the setters will
     // have any effect.
     readonly: function () {
-      var layer = this, readable = {};
+      var creature = this, readable = {};
 
       $.each(['name', 'data', 'position', 'size'], function (index, method) {
         readable[method] = function () {
-          return layer[method]();
+          return creature[method]();
         };
       });
 
       $.each(['bind', 'unbind', 'trigger'], function (index, method) {
-        readable[method] = $.proxy(layer[method], layer);
+        readable[method] = $.proxy(creature[method], creature);
       });
 
       return readable;
