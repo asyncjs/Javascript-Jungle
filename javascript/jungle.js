@@ -79,8 +79,8 @@
           height: this.el.height()
         };
       }
-      size.width  && this.element.width(size.width);
-      size.height && this.element.height(size.height);
+      size.width  && this.element.css("width", size.width);
+      size.height && this.element.css("height", size.height);
       return this;
     },
     position: function (position) {
@@ -121,7 +121,6 @@
   })();
 
   // Load the list
-  console.log(jj);
   jj.load(CREATURE_URL_LIST);
 
 })(this.jQuery, this.Broadcast, this);
