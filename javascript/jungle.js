@@ -50,8 +50,13 @@
     //   });
     //
     createLayer: function (name, callback) {
+      if (layers[name]) {
+        window.console.warn('The layer "%s" already exists!');
+        return;
+      }
+
       var element = $('<div class="layer" />').appendTo(jungle),
-          layer   = new Layer(element);
+          layer   = new Layer(name, element);
 
       element.css(jj.size());
 
@@ -99,10 +104,11 @@
   });
   
   // Create a Layer object.
-  function Layer(element) {
+  function Layer(name, element) {
     Events.call(this, {alias: false});
     jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
     this.el = element;
+    this._name = name;
     this._data = {};
   }
 
@@ -110,6 +116,11 @@
   $.extend(Layer.prototype, {
     // Reassign the constructor.
     constructor: Layer,
+
+    // Returns the layer name.
+    name: function () {
+      return this._name;
+    },
 
     // Allows get/setting of metadata in an object.
     //
@@ -171,9 +182,11 @@
     // Returns a readonly version of the layer. None of the setters will
     // have any effect.
     readonly: function () {
-      var layer = this, readable = {};
+      var layer = this, readable = {}, methods = [
+        'name', 'data', 'position', 'size', 'bind', 'unbind', 'trigger'
+      ];
 
-      $.each(['data', 'position', 'size', 'bind', 'unbind', 'trigger'], function (index, method) {
+      $.each(methods, function (index, method) {
         readable[method] = function () {
           return layer[method]();
         };
