@@ -7,17 +7,25 @@ jj.createLayer('grass', function (layer) {
   var w = layer.size().width, 
       h = layer.size().height;
   var rp = Raphael(el[0],w,h);
-  var path = ["M 0 " + (h)];
-  //create the grass path
-  for (var i = 0; i <= layer.size().width; i+=20){
-    var gh = Math.floor(Math.random()*20) + 70;
-    path.push("L " + i + " " + (h - gh ));
-    path.push("L " + i + " " + h);
+  var curGrowth = 0;
+  var gen_path = function(growth) {
+    var path = ["M 0 " + (h)];
+    for (var i = 0; i <= layer.size().width; i+=20){
+      var gh = Math.floor(Math.random()*20) + 70 + growth;
+      path.push("L " + i + " " + (h - gh ));
+      path.push("L " + i + " " + h);
+    };
+    path.push("z");
+    return path.join(" ");
   };
-  path.push("z");
-  console.log(path.join(" "));
-  var grass = rp.path(path.join(" ")).attr({
+  //create the grass path
+  var grass = rp.path(gen_path(curGrowth)).attr({
     stroke: '100-#0f5b0f-#37cf37',
     fill: '100-#0f5b0f-#37cf37'
+  });
+
+  jj.bind('breakfast',function() {
+    curGrowth += 10;
+    grass.animate({path: gen_path(curGrowth)}, 1000);
   });
 });
