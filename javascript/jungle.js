@@ -19,6 +19,7 @@
     all: function () {
       return layers;
     },
+    load: getScript,
     events: {
       crash : function(name,error) {
         console.log(name + " failed at evolution: " + error);
@@ -50,7 +51,7 @@
     }
   });
 
-  $.each(window.jj.events,function(n,cb) {
+  $.each(jj.events,function(n,cb) {
     jj.bind(n,cb);
   });
   
@@ -121,6 +122,7 @@
   })();
 
   // Load the list
+  console.log(jj);
   jj.load(CREATURE_URL_LIST);
 
 })(this.jQuery, this.Broadcast, this);
