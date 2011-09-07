@@ -105,7 +105,8 @@
         callbacks[index].callback.apply(this, slice.call(arguments, 1));
       }
 
-      if (topic !== 'all') {
+      // Async hack: tick & clock
+      if (topic !== 'all' && topic !== 'tick' && topic !== 'clock') {
         this.trigger.apply(this, ['all'].concat(slice.call(arguments)));
       }
 

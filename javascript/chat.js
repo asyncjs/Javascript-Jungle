@@ -24,9 +24,11 @@ jj.createCreature("chat", function (layer) {
     jj.bind("all", function(eventName, message){
         var nameElem, delimElem, messageElem, report;
     
+        /*
         if (eventName === "tick" || eventName === "clock"){
             return;
         }
+        */
         
         report = jQuery("<li class='chat-entry'></li>");
         nameElem = jQuery("<span class='chat-name'></span>").text(eventName);
