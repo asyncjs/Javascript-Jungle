@@ -6,17 +6,23 @@
       CREATURE_URL_LIST, FRAMERATE;
 
   FRAMERATE = 30;
-
+  
   // File that contains a list of urls, passed to jungle.load, e.g. jungle.load("http://foo.com/hello.js");
   CREATURE_URL_LIST = 'http://jsbin.com/uxukok/latest';
 
   // Create the global jungle object.
+  
   window.jj = jj = $.extend({}, Events, {
     get: function (name) {
       return layers[name] || null;
     },
     all: function () {
       return layers;
+    },
+    events: {
+      crash : function(name,error) {
+        console.log(name + " failed at evolution: " + error);
+      }
     },
     load: getScript,
     createLayer: function (name, callback) {
@@ -40,6 +46,10 @@
     }
   });
 
+  $.each(window.jj.events,function(n,cb) {
+    jj.bind(n,cb);
+  });
+  
   // Create a Layer object.
   function Layer(element) {
     Events.call(this, {alias: false});
