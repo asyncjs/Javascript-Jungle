@@ -45,11 +45,19 @@
     Events.call(this, {alias: false});
     jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
     this.el = element;
+    this.data = {};
   }
 
   Layer.prototype = Object.create(Events);
   $.extend(Layer.prototype, {
     constructor: Layer,
+    data: function (data) {
+      if (data) {
+        $.extend(this.data, data);
+        return this;
+      }
+      return this.data;
+    },
     size: function (size) {
       if (!size) {
         return {
@@ -74,7 +82,7 @@
     readonly: function () {
       var layer = this, readable = {};
 
-      $.each(['position', 'size', 'bind', 'unbind'], function (index, method) {
+      $.each(['data', 'position', 'size', 'bind', 'unbind'], function (index, method) {
         readable[method] = function () {
           return layer[method]();
         };
