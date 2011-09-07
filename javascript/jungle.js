@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 (function (jQuery, Broadcast, window) {
   var $ = jQuery.noConflict(),
       Events = Broadcast.noConflict(),
@@ -83,8 +82,3 @@
   });
 
 })(this.jQuery, this.Broadcast, this);
-=======
-(function ($, this) {
-  
-}(this.jQuery, this));
->>>>>>> jungle-loader stub
