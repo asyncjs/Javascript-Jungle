@@ -1,35 +1,29 @@
 body {
   margin : 0;
   padding : 0;
-
-  /* Change depending on time of day */
-  background-color : #000;
-  box-shadow: inset 0 0 200px #777;
 }
 
 div#jungle {
-  height : 500px;
+  /* Change depending on time of day */
+  background-color : #000;
+  box-shadow: inset 0 0 200px #777;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-span.droplet0 {
+div.droplet1 {
   background-image: url(../images/droplet1.png);
-  background-size : 10px 10px;
-  width : 50px;
-  height : 50px;
-  background-color: red;
+  background-size : 30px 30px;
+  width : 30px;
+  height : 30px;
 }
 
-span.droplet1 {
+div.droplet2 {
   background-image: url(../images/droplet2.png);
-  background-size : 10px 10px;
-}
-
-span.droplet2 {
-  background-image: url(../images/droplet1.png);
-  background-size : 5px 5px;
-}
-
-span.droplet3 {
-  background-image: url(../images/droplet2.png);
-  background-size : 5px 5px;
+  background-size : 30px 30px;
+  width : 30px;
+  height : 30px;
 }
