@@ -19,7 +19,6 @@
     all: function () {
       return layers;
     },
-    load: getScript,
     events: {
       crash : function(name,error) {
         console.log(name + " failed at evolution: " + error);
