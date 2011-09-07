@@ -37,7 +37,8 @@
         width:  jungle.width(),
         height: jungle.height()
       };
-    }
+    },
+    jQuery: $       
   });
 
   // Create a Layer object.
@@ -82,7 +83,7 @@
     readonly: function () {
       var layer = this, readable = {};
 
-      $.each(['data', 'position', 'size', 'bind', 'unbind'], function (index, method) {
+      $.each(['data', 'position', 'size', 'bind', 'unbind', 'trigger'], function (index, method) {
         readable[method] = function () {
           return layer[method]();
         };
