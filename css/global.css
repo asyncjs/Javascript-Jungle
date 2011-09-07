@@ -14,6 +14,10 @@ div#jungle {
   bottom: 0;
 }
 
+.layer {
+  position: absolute;
+}
+
 div.droplet1 {
   background-image: url(../images/droplet1.png);
   background-size : 30px 30px;

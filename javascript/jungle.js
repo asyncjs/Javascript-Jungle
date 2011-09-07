@@ -50,7 +50,7 @@
     //   });
     //
     createLayer: function (name, callback) {
-      var element = $('<div />').appendTo(jungle),
+      var element = $('<div class="layer" />').appendTo(jungle),
           layer   = new Layer(element);
 
       element.css(jj.size());
@@ -164,8 +164,7 @@
           zindex: this.el.css('z-index') || 0
         });
       }
-      this.el.position(position);
-      position.zindex && this.el.css('z-index', position.zindex);
+      this.el.css(position);
       return this;
     },
 
