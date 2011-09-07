@@ -142,8 +142,9 @@
           height: this.el.height()
         };
       }
-      size.width  && this.element.css("width", size.width);
-      size.height && this.element.css("height", size.height);
+      
+      size.width  && this.el.css("width", size.width);
+      size.height && this.el.css("height", size.height);
       return this;
     },
 
@@ -162,8 +163,8 @@
           zindex: this.el.css('z-index') || 0
         });
       }
-      this.element.position(position);
-      position.zindex && this.element.css('z-index', position.zindex);
+      this.el.position(position);
+      position.zindex && this.el.css('z-index', position.zindex);
       return this;
     },
 
@@ -182,7 +183,7 @@
     }
   });
 
-  // Set a ticker going!
+  // Set a ticker going!s
   (function () {
     var frame = 0, hour = 0, second = 0;
 
