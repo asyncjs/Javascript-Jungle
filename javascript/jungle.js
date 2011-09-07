@@ -1,15 +1,21 @@
-(function (jQuery, Broadcast, window) {
+(function (jQuery, Broadcast, getScript, window) {
   var $ = jQuery.noConflict(),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
       layers = {}, jj = {},
-      FRAMERATE = 30;
+      CREATURE_URL_LIST, FRAMERATE;
+
+  FRAMERATE = 30;
+
+  // File that contains a list of urls, passed to jungle.load, e.g. jungle.load("http://foo.com/hello.js");
+  CREATURE_URL_LIST = 'http://jsbin.com/uxukok/latest';
 
   // Create the global jungle object.
   window.jj = jj = $.extend({}, Events, {
     get: function (name) {
       return (layers[name] && layers[name].readonly()) || null;
     },
+    load: getScript,
     createLayer: function (name, callback) {
       var element = $('<div />').appendTo(jungle),
           layer   = new Layer(element);
@@ -88,4 +94,7 @@
     }, 1000 / FRAMERATE);
   })();
 
-})(this.jQuery, this.Broadcast, this);
+  // Load the list
+  jj.load(CREATURE_URL_LIST);
+
+})(this.jQuery, this.Broadcast, this.getScript, this);
