@@ -1,34 +1,25 @@
 jj.createLayer("chat", function (layer) {
     "use strict";
-    
-    // Console logging
-    window.O = function(){
-        if (window.console){
-            window.console.log.apply(window.console, arguments);
-        }
-    };
 
     // the div element for the layer.
     var jQuery = jj.jQuery,
         element = layer.el,
-        logElem = jQuery("<ul/>").appendTo(element);
+        logElem = jQuery("<ul class='chat'></ul>").appendTo(element),
+        styleElem = jQuery("<style/>").appendTo("head");
 
     layer
         .size({width:"300px", height:"100%"})
         .position({right:0, top:0, zIndex:999999});
     
-    element.css({
-        backgroundColor: "#000",
-        color: "#fff",
-        opacity:0.7
-    });
+    styleElem.text(
+        ".chat {list-style-type:none; padding:0.5em 1em; margin:0; font-family:monospace; overflow:auto; height:100%; opacity:0.7; color:#fff; background-color:#000; }" +
+        ".chat .chat-entry{ margin:0.2em 0; }" +
+        ".chat .chat-name{ color:#3f3; }" +
+        ".chat .chat-delimiter{ color:#777; }" +
+        ".chat .chat-message{ color:#ff9; font-weight:bold; }"
+    );
     
-    logElem.css({
-        listStyleType: "none",
-        margin:"0.5em 1em",
-        padding:0,
-        fontFamily: "monospace"
-    });
+    logElem.append("<li class='chat-name'><span class='chat-name'>asyncjs</span><span class='chat-delimiter'>: </span><span class='chat-message'>Welcome to the JavaScript Jungle</span></li>");
 
     jj.bind("all", function(eventName, message){
         var nameElem, delimElem, messageElem, report;
@@ -47,33 +38,4 @@ jj.createLayer("chat", function (layer) {
             .append(nameElem, delimElem, messageElem)
             .appendTo(logElem);
     });
-
-    /*
-    // Set/Get any metadata.
-    layer.data({heelo: 'world'});
-
-    // Trigger an event on your creature.
-    layer.trigger('myevent');
-
-    // Get a read only version of another layer.
-    var prem = jj.get('prem');
-
-    // Bind an event on Prems creature.
-    prem.bind('prems event');
-
-    // Returns read-only copies of all creatures.
-    jj.all()
-
-    // Trigger a global event.
-    jj.trigger('hello');
-
-    // Bind to a global event.
-    jj.bind('tick', function (frame) {
-    // Animate here.
-    });
-
-    jj.bind('time', function (hours, seconds) {
-
-    });
-    */
 });
