@@ -10,7 +10,8 @@ jj.createLayer('grass', function (layer) {
   var path = ["M 0 " + (h)];
   //create the grass path
   for (var i = 0; i <= layer.size().width; i+=20){
-    path.push("L " + i + " " + (h - 70));
+    var gh = Math.floor(Math.random()*20) + 70;
+    path.push("L " + i + " " + (h - gh ));
     path.push("L " + i + " " + h);
   };
   path.push("z");
