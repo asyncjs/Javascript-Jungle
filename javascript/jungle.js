@@ -2,7 +2,7 @@
   var $ = jQuery.noConflict(true),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
-      layers = {}, jj = {},
+      layers = {}, jj = {}, events = {},
       CREATURE_URL_LIST, FRAMERATE;
 
   // The number of frames/second that the "tick" event will fire.
@@ -32,13 +32,6 @@
     //
     all: function () {
       return layers;
-    },
-
-    // Default events.
-    events: {
-      crash : function (name, error) {
-        window.console.log(name + " failed at evolution: " + error);
-      }
     },
 
     // Loads args.
@@ -93,8 +86,14 @@
     }
   });
 
+  events = {
+    crash : function (name, error) {
+      window.console.log(name + " failed at evolution: " + error);
+    }
+  };
+
   // Bind default events.
-  $.each(jj.events, function (n, cb) {
+  $.each(events, function (n, cb) {
     jj.bind(n, cb);
   });
   
