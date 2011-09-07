@@ -13,7 +13,10 @@
   // Create the global jungle object.
   window.jj = jj = $.extend({}, Events, {
     get: function (name) {
-      return (layers[name] && layers[name].readonly()) || null;
+      return layers[name] || null;
+    },
+    all: function () {
+      return layers;
     },
     load: getScript,
     createLayer: function (name, callback) {
@@ -24,7 +27,7 @@
 
       try {
         callback(layer);
-        layers[name] = layer;
+        layers[name] = layer.readonly();
       } catch (error) {
         jj.trigger('crash', name, error);
       }
