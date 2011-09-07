@@ -94,12 +94,13 @@
 
   // Set a ticker going!
   (function () {
-    var frame = 0;
+    var frame = 0, hour = 0, second = 0;
+
     setInterval(function () {
       jj.trigger('tick', frame);
 
       frame += 1;
-      if (frame > FRAMERATE) {
+      if (frame >= FRAMERATE) {
         frame = 0;
       }
     }, 1000 / FRAMERATE);
