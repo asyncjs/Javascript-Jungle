@@ -121,7 +121,6 @@
   })();
 
   // Load the list
-  console.log(jj);
   jj.load(CREATURE_URL_LIST);
 
 })(this.jQuery, this.Broadcast, this);
