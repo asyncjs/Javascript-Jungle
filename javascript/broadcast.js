@@ -39,8 +39,8 @@
    *
    *   // In the browser.
    *   var events = new Broadcast();
-   *   events.addListener('say', function (message) { console.log(message); });
-   *   events.emit('say', 'Hello World'); // Logs "Hello World"
+   *   events.bind('say', function (message) { console.log(message); });
+   *   events.trigger('say', 'Hello World'); // Logs "Hello World"
    *
    *   // On the server.
    *   var Broadcast = require('broadcast');
@@ -51,8 +51,8 @@
   function Broadcast(options) {
     this._callbacks = {};
     if (!options || options.alias === true) {
-      this.on = this.addListener;
-      this.dispatch = this.emit;
+      this.on = this.bind;
+      this.dispatch = this.trigger;
     }
   }
 
@@ -61,9 +61,9 @@
    *
    * Examples
    *
-   *   Broadcast.addListener('say', function (message) { console.log(message); });
-   *   Broadcast.emit('say', 'Hello World'); // Logs "Hello World"
-   *   Broadcast.removeListener('say');
+   *   Broadcast.bind('say', function (message) { console.log(message); });
+   *   Broadcast.trigger('say', 'Hello World'); // Logs "Hello World"
+   *   Broadcast.unbind('say');
    */
   extend(Broadcast, {
 
@@ -72,31 +72,31 @@
      */
     _callbacks: {},
 
-    /* Public: emites a topic. Calls all registered callbacks passing in any
+    /* Public: triggeres a topic. Calls all registered callbacks passing in any
      * arguments provided after the topic string.
      *
      * There is also a special topic called "all" that will fire when any other
-     * topic is emited providing the topic emited and any additional
+     * topic is triggered providing the topic triggered and any additional
      * arguments to all callbacks.
      *
-     * topic      - A topic String to emit.
+     * topic      - A topic String to trigger.
      * arguments* - All subsequent arguments will be passed into callbacks.
      *
      * Examples
      *
      *   var events = new Broadcast();
-     *   events.addListener('say', function (message) { console.log(message); });
-     *   events.emit('say', 'Hello World'); // Logs "Hello World"
+     *   events.bind('say', function (message) { console.log(message); });
+     *   events.trigger('say', 'Hello World'); // Logs "Hello World"
      *
-     *   // addListener to the special "all" topic.
-     *   events.addListener('all', function (topic) {
+     *   // bind to the special "all" topic.
+     *   events.bind('all', function (topic) {
      *     console.log(topic, arguments[1]);
      *   });
-     *   events.emit('say', 'Hello Again'); // Logs "say Hello World"
+     *   events.trigger('say', 'Hello Again'); // Logs "say Hello World"
      *
      * Returns itself for chaining.
      */
-    emit: function (topic /* , arguments... */) {
+    trigger: function (topic /* , arguments... */) {
       var callbacks = this._callbacks[topic] || [],
           slice = Array.prototype.slice,
           index = 0, count = callbacks.length;
@@ -106,7 +106,7 @@
       }
 
       if (topic !== 'all') {
-        this.emit.apply(this, ['all'].concat(slice.call(arguments)));
+        this.trigger.apply(this, ['all'].concat(slice.call(arguments)));
       }
 
       return this;
@@ -118,43 +118,43 @@
      * single object containing topic/callback pairs as an argument.
      *
      * Events can also be name-spaced ala jQuery to allow easy removal of
-     * muliple callbacks in one call to .removeListener(). To namespace a
+     * muliple callbacks in one call to .unbind(). To namespace a
      * callback simply suffix the topic with a period (.) followed by your
      * namespace.
      *
      * topic    - A topic String or Object of topic/callback pairs.
-     * callback - Callback Function to call when topic is emited.
+     * callback - Callback Function to call when topic is triggered.
      *
      * Examples
      *
      *   var events = new Broadcast();
      *
      *   // Register single callback.
-     *   events.addListener('create', function () {});
+     *   events.bind('create', function () {});
      *
      *   // Register a single callback to multiple topics.
-     *   events.addListener('create update delete', function () {});
+     *   events.bind('create update delete', function () {});
      *
      *   // Register multiple callbacks.
-     *   events.addListener({
+     *   events.bind({
      *     'update', function () {},
      *     'delete', function () {}
      *   );
      *
      *   // Register a callback with a namespace.
-     *   events.addListener('create.my-namespace', function () {});
-     *   events.addListener('update.my-namespace', function () {});
+     *   events.bind('create.my-namespace', function () {});
+     *   events.bind('update.my-namespace', function () {});
      *
      *   // No longer requires a callback to be passed to unbind.
-     *   events.removeListener('.my-namespace', function () {});
+     *   events.unbind('.my-namespace', function () {});
      *
      * Returns itself for chaining.
      */
-    addListener: function (topic, callback) {
+    bind: function (topic, callback) {
       if (arguments.length === 1) {
         for (var key in topic) {
           if (hasOwnProp.call(topic, key)) {
-            this.addListener(key, topic[key]);
+            this.bind(key, topic[key]);
           }
         }
       } else {
@@ -190,37 +190,37 @@
      * for that topic are removed. If a topic and function are passed all
      * occurrences of that function are removed.
      *
-     * topic    - A topic String to removeListener (optional).
+     * topic    - A topic String to unbind (optional).
      * callback - A specific callback Function to remove (optional).
      *
      * Examples
      *
      *   function A() {}
      *
-     *   events.addListener('create', A);
-     *   events.addListener('create', function B() {});
-     *   events.addListener({
+     *   events.bind('create', A);
+     *   events.bind('create', function B() {});
+     *   events.bind({
      *     'create', function C() {},
      *     'update', function D() {},
      *     'delete', function E() {}
      *   );
-     *   events.addListener('custom.my-namespace', function F() {});
+     *   events.bind('custom.my-namespace', function F() {});
      *
      *   // Removes callback (A).
-     *   events.removeListener('create', A);
+     *   events.unbind('create', A);
      *
      *   // Removes callbacks for topic 'create' (B & C).
-     *   events.removeListener('create');
+     *   events.unbind('create');
      *
      *   // Removes callbacks for namespace '.my-namespace' (F).
-     *   events.removeListener('.my-namespace');
+     *   events.unbind('.my-namespace');
      *
      *   // Removes all callbacks for all topics (D & E).
-     *   events.removeListener();
+     *   events.unbind();
      *
      * Returns itself for chaining.
      */
-    removeListener: function (topic, callback) {
+    unbind: function (topic, callback) {
       var callbacks = {},
           original = topic,
           namespaceIndex = (topic || '').lastIndexOf('.'),
@@ -249,7 +249,7 @@
 
                 wrappers.splice(index, 1);
                 this._callbacks[key] = wrappers;
-                this.removeListener(original, callback);
+                this.unbind(original, callback);
 
                 break;
               }
