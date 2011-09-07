@@ -1,4 +1,4 @@
-(function (jQuery, Broadcast, getScript, window) {
+(function (jQuery, Broadcast, window) {
   var $ = jQuery.noConflict(),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
@@ -24,7 +24,11 @@
         console.log(name + " failed at evolution: " + error);
       }
     },
-    load: getScript,
+    load: function(){
+        $.each(arguments, function(i, url){
+            $.getScript(url);
+        });
+    },
     createLayer: function (name, callback) {
       var element = $('<div />').appendTo(jungle),
           layer   = new Layer(element);
@@ -119,4 +123,4 @@
   // Load the list
   jj.load(CREATURE_URL_LIST);
 
-})(this.jQuery, this.Broadcast, this.getScript, this);
+})(this.jQuery, this.Broadcast, this);
