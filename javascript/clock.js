@@ -12,12 +12,12 @@ jj.createLayer('clock', function (layer) {
   // Create a clock that moves six times faster than normal.
   // eg. 10 mins = 1 hour.
   jj.bind('tick', function (frame) {
-    jj.trigger('clock', hours, minutes);
-    if (minutes === 0 && events[hours]) {
-      jj.trigger(events[hours]);
-    }
-
     if (frame % 5 === 0) {
+      jj.trigger('clock', hours, minutes);
+      if (minutes === 0 && events[hours]) {
+        jj.trigger(events[hours]);
+      }
+
       minutes += 1;
     }
     if (minutes >= 60) {

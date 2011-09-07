@@ -1,8 +1,9 @@
 jj.createLayer('creature', function (layer) {
   var canvas = document.createElement('canvas'),
       context = canvas.getContext('2d'),
-      width  = canvas.width  = 100,
-      height = canvas.height = 100;
+      width   = canvas.width  = 100,
+      height  = canvas.height = 100,
+      world   = jj.size();
 
   layer.size({width: width, height: height});
   layer.position({top: 50, left: jj.center().left - (width / 2)});
@@ -13,4 +14,11 @@ jj.createLayer('creature', function (layer) {
   context.arc(50, 50, width / 2, 0, Math.PI * 2, true); 
   context.closePath();
   context.fill();
+
+  jj.bind('tick', function () {
+    if (layer.position().top > world.height) {
+      layer.position({top: -height});
+    }
+    layer.position({top: '+= 5px'});
+  });
 });

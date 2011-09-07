@@ -1,38 +1,79 @@
-/*jj.createLayer('creature', function (layer) {
-  // the div element for the layer.
-  var element = layer.el;
+jj.createLayer("chat", function (layer) {
+    "use strict";
+    
+    // Console logging
+    window.O = function(){
+        if (window.console){
+            window.console.log.apply(window.console, arguments);
+        }
+    };
 
-  // Set the size of your layer.
-  layer.size({width: 50, height: 50});
+    // the div element for the layer.
+    var jQuery = jj.jQuery,
+        element = layer.el,
+        logElem = jQuery("<ul/>").appendTo(element);
 
-  // Set/Get the size of the layer.
-  layer.size() // {width: 50, height: 50}
-  // Set/Get the position of the layer.
-  layer.position() // {top: 50, left: 50, zindex: 0}
-  // Set/Get any metadata.
-  layer.data({heelo: 'world'});
+    layer
+        .size({width:"300px", height:"100%"})
+        .position({right:0, top:0, zIndex:999999});
+    
+    element.css({
+        backgroundColor: "#000",
+        color: "#fff",
+        opacity:0.7
+    });
+    
+    logElem.css({
+        listStyleType: "none",
+        margin:"0.5em 1em",
+        padding:0,
+        fontFamily: "monospace"
+    });
 
-  // Trigger an event on your creature.
-  layer.trigger('myevent');
+    jj.bind("all", function(eventName, message){
+        var nameElem, delimElem, messageElem, report;
+    
+        if (eventName === "tick" || eventName === "clock"){
+            return;
+        }
+        
+        nameElem = jQuery("<span class='chat-name'></span>").text(eventName);
+        if (message){
+            delimElem = jQuery("<span class='chat-delimiter'>: </span>");
+            messageElem = jQuery("<span class='chat-message'></span>").text(message);
+        }
+        
+        report = jQuery("<li/>")
+            .append(nameElem, delimElem, messageElem)
+            .appendTo(logElem);
+    });
 
-  // Get a read only version of another layer.
-  var prem = jj.get('prem');
+    /*
+    // Set/Get any metadata.
+    layer.data({heelo: 'world'});
 
-  // Bind an event on Prems creature.
-  prem.bind('prems event');
+    // Trigger an event on your creature.
+    layer.trigger('myevent');
 
-  // Returns read-only copies of all creatures.
-  jj.all()
+    // Get a read only version of another layer.
+    var prem = jj.get('prem');
 
-  // Trigger a global event.
-  jj.trigger('hello');
+    // Bind an event on Prems creature.
+    prem.bind('prems event');
 
-  // Bind to a global event.
-  jj.bind('tick', function (frame) {
+    // Returns read-only copies of all creatures.
+    jj.all()
+
+    // Trigger a global event.
+    jj.trigger('hello');
+
+    // Bind to a global event.
+    jj.bind('tick', function (frame) {
     // Animate here.
-  });
+    });
 
-  jj.bind('time', function (hours, seconds) {
+    jj.bind('time', function (hours, seconds) {
 
-  });
-});*/
+    });
+    */
+});
