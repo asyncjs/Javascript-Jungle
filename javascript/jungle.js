@@ -68,7 +68,7 @@
       }
     },
 
-    // Returns the position (top/left/zindex) of the center of the
+    // Returns the position (top/left/zIndex) of the center of the
     // environment.
     //
     //   var center = jj.center();
@@ -160,19 +160,19 @@
       return this;
     },
 
-    // Allows get/setting of layer element top/left/zindex. Accepts the same
+    // Allows get/setting of layer element top/left/zIndex. Accepts the same
     // values as jQuery.css() would expect.
     //
     //   // Set yr sizes here.
     //   layer.position({top: 20, left: 40});
     //
     //   // Get yr size there.
-    //   layer.position(); //=> {top: 20, left: 40, zindex: 0}
+    //   layer.position(); //=> {top: 20, left: 40, zIndex: 0}
     //
     position: function (position) {
       if (!position) {
         return $.extend(this.el.offset(), {
-          zindex: this.el.css('z-index') || 0
+          zIndex: this.el.css('z-index') || 0
         });
       }
       this.el.css(position);

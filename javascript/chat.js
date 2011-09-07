@@ -15,7 +15,7 @@ jj.createLayer("chat", function (layer) {
 
     layer
         .size({width:"300px", height:"100%"})
-        .position({right:0, top:0, zindex:999999});
+        .position({right:0, top:0, zIndex:999999});
     
     element.css({
         backgroundColor: "#000",
