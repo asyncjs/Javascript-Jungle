@@ -2,8 +2,8 @@
 var CREATURE_URL_LIST = "http://jsbin.com/uxukok/latest";
 
 // Load handler
-jungle.load = function(){
-    getScript.apply(null, arguments);
+jj.load = function(){
+  getScript.apply(null, arguments);
 };
 
 // Load the list
