@@ -182,14 +182,16 @@
     // Returns a readonly version of the layer. None of the setters will
     // have any effect.
     readonly: function () {
-      var layer = this, readable = {}, methods = [
-        'name', 'data', 'position', 'size', 'bind', 'unbind', 'trigger'
-      ];
+      var layer = this, readable = {};
 
-      $.each(methods, function (index, method) {
+      $.each(['name', 'data', 'position', 'size'], function (index, method) {
         readable[method] = function () {
           return layer[method]();
         };
+      });
+
+      $.each(['bind', 'unbind', 'trigger'], function (index, method) {
+        readable[method] = $.proxy(layer[method], layer);
       });
 
       return readable;
