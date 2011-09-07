@@ -9,23 +9,25 @@ jj.createCreature('grass', function (layer) {
   var rp = Raphael(el[0],w,h);
   var curGrowth = 0;
   var gen_path = function(growth) {
-    var path = ["M 0 " + (h)];
+    var path = ["M 0 " + h];
     for (var i = 0; i <= layer.size().width; i+=20){
-      var gh = Math.floor(Math.random()*20) + 70 + growth;
-      path.push("L " + i + " " + (h - gh ));
-      path.push("L " + i + " " + h);
+      //this can't be random every time.
+      var gh = Math.floor(Math.random()*100) + 70;
+      path.push("L " + i + " " + (h - growth - gh ));
+      path.push("L " + i + " " + (h + gh));
     };
     path.push("z");
     return path.join(" ");
   };
   //create the grass path
+  console.log(gen_path(curGrowth));
   var grass = rp.path(gen_path(curGrowth)).attr({
     stroke: '100-#0f5b0f-#37cf37',
     fill: '100-#0f5b0f-#37cf37'
   });
 
   jj.bind('breakfast',function() {
-    curGrowth += 10;
+    curGrowth += 20;
     grass.animate({path: gen_path(curGrowth)}, 1000);
   });
 });
