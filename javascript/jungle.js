@@ -2,23 +2,42 @@
   var $ = jQuery.noConflict(),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
-      layers = {}, jj = {};
+      layers = {}, jj = {},
+      FRAMERATE = 30;
 
-  // Update the Event object to use jQuery methods.
-  $.each({'emit': 'trigger', 'addListener': 'bind', 'removeListener': 'unbind'}, function (method) {
-    Events[this] = Events[method];
-    Events.prototype[this] = Events.prototype[method];
+  // Create the global jungle object.
+  window.jj = jj = $.extend({}, Events, {
+    get: function (name) {
+      return (layers[name] && layers[name].readonly()) || null;
+    },
+    createLayer: function (name, callback) {
+      var element = $('<div />').appendTo(jungle),
+          layer   = new Layer(element);
 
-    delete Events[method];
-    delete Events.prototype[method];
+      element.css(jj.size());
+
+      try {
+        callback(layer);
+        layers[name] = layer;
+      } catch (error) {
+        jj.trigger('crash', name, error);
+      }
+    },
+    size: function () {
+      return {
+        width:  jungle.width(),
+        height: jungle.height()
+      };
+    }
   });
-  delete Events.noConflict;
 
   // Create a Layer object.
   function Layer(element) {
     Events.call(this, {alias: false});
+    jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
     this.el = element;
   }
+
   Layer.prototype = Object.create(Events);
   $.extend(Layer.prototype, {
     constructor: Layer,
@@ -56,29 +75,17 @@
     }
   });
 
-  window.jj = jj = $.extend({}, Events, {
-    get: function (name) {
-      return (layers[name] && layers[name].readonly()) || null;
-    },
-    createLayer: function (name, callback) {
-      var element = $('<div />').appendTo(jungle),
-          layer   = new Layer(element);
+  // Set a ticker going!
+  (function () {
+    var frame = 0;
+    setInterval(function () {
+      jj.trigger('tick', frame);
 
-      element.css(jj.size());
-
-      try {
-        callback(layer);
-        layers[name] = layer;
-      } catch (error) {
-        jj.trigger('crash', name, error);
+      frame += 1;
+      if (frame > FRAMERATE) {
+        frame = 0;
       }
-    },
-    size: function () {
-      return {
-        width:  jungle.width(),
-        height: jungle.height()
-      };
-    }
-  });
+    }, 1000 / FRAMERATE);
+  })();
 
 })(this.jQuery, this.Broadcast, this);
