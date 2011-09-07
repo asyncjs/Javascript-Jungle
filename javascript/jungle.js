@@ -1,34 +1,61 @@
 (function (jQuery, Broadcast, window) {
-  var $ = jQuery.noConflict(),
+  var $ = jQuery.noConflict(true),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
       layers = {}, jj = {},
       CREATURE_URL_LIST, FRAMERATE;
 
+  // The number of frames/second that the "tick" event will fire.
   FRAMERATE = 30;
   
   // File that contains a list of urls, passed to jungle.load, e.g. jungle.load("http://foo.com/hello.js");
   CREATURE_URL_LIST = 'http://jsbin.com/uxukok/latest';
 
   // Create the global jungle object.
-  
   window.jj = jj = $.extend({}, Events, {
+    // Gets a particular layer by the name or null if not found.
+    //
+    //   var prem = jj.get('prem');
+    //   if (prem) {
+    //     prem.trigger('hello');
+    //   }
+    //
     get: function (name) {
       return layers[name] || null;
     },
+
+    // Gets a read-only object with copies of all layers.
+    //
+    //   $.each(jj.all(), function (layer, name) {
+    //     console.log("hello " + name);
+    //   });
+    //
     all: function () {
       return layers;
     },
+
+    // Default events.
     events: {
-      crash : function(name,error) {
-        console.log(name + " failed at evolution: " + error);
+      crash : function (name, error) {
+        window.console.log(name + " failed at evolution: " + error);
       }
     },
-    load: function(){
-        $.each(arguments, function(i, url){
-            $.getScript(url);
-        });
+
+    // Loads args.
+    load: function () {
+      $.each(arguments, function (i, url) {
+        $.getScript(url);
+      });
     },
+
+    // Creates a new Layer in the environment. This is the main method that
+    // will be used to populate the environment.
+    //
+    //   jj.createLayer('bill', function (layer) {
+    //     layer.el.size({width: 300, height: 120});
+    //     layer.el.position({top: 20, left: 0});
+    //   });
+    //
     createLayer: function (name, callback) {
       var element = $('<div />').appendTo(jungle),
           layer   = new Layer(element);
@@ -42,6 +69,22 @@
         jj.trigger('crash', name, error);
       }
     },
+
+    // Returns the position (top/left/zindex) of the center of the
+    // environment.
+    //
+    //   var center = jj.center();
+    //   layer.position({width: center.left, height: center.top});
+    //
+    center: function () {
+      var size = jj.size();
+      return {
+        top:  size.height / 2,
+        left: size.width / 2
+      };
+    },
+
+    // Returns the size (width/height) of the environment.
     size: function () {
       return {
         width:  jungle.width(),
@@ -50,8 +93,9 @@
     }
   });
 
-  $.each(jj.events,function(n,cb) {
-    jj.bind(n,cb);
+  // Bind default events.
+  $.each(jj.events, function (n, cb) {
+    jj.bind(n, cb);
   });
   
   // Create a Layer object.
@@ -59,19 +103,39 @@
     Events.call(this, {alias: false});
     jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
     this.el = element;
-    this.data = {};
+    this._data = {};
   }
 
   Layer.prototype = Object.create(Events);
   $.extend(Layer.prototype, {
+    // Reassign the constructor.
     constructor: Layer,
+
+    // Allows get/setting of metadata in an object.
+    //
+    //   // Set yr data here.
+    //   layer.data({foodstuffs: ['Apples', 'Oranges', 'Pears']});
+    //
+    //   // Get yr data there.
+    //   layer.data().foodstuffs; //=> {foodstuffs: ['Apples', 'Oranges', 'Pears']}
+    //
     data: function (data) {
       if (data) {
-        $.extend(this.data, data);
+        $.extend(this._data, data);
         return this;
       }
-      return this.data;
+      return this._data;
     },
+
+    // Allows get/setting of layer element width/height. Accepts the same
+    // values as jQuery.width()/jQuery.height().
+    //
+    //   // Set yr sizes here.
+    //   layer.size({width: 20, height: 40});
+    //
+    //   // Get yr size there.
+    //   layer.size(); //=> {width: 20, height: 40}
+    //
     size: function (size) {
       if (!size) {
         return {
@@ -83,6 +147,16 @@
       size.height && this.element.css("height", size.height);
       return this;
     },
+
+    // Allows get/setting of layer element top/left/zindex. Accepts the same
+    // values as jQuery.css() would expect.
+    //
+    //   // Set yr sizes here.
+    //   layer.position({top: 20, left: 40});
+    //
+    //   // Get yr size there.
+    //   layer.position(); //=> {top: 20, left: 40, zindex: 0}
+    //
     position: function (position) {
       if (!position) {
         return $.extend(this.el.offset(), {
@@ -90,9 +164,12 @@
         });
       }
       this.element.position(position);
-      size.zindex && this.element.css('z-index', position.zindex);
+      position.zindex && this.element.css('z-index', position.zindex);
       return this;
     },
+
+    // Returns a readonly version of the layer. None of the setters will
+    // have any effect.
     readonly: function () {
       var layer = this, readable = {};
 
