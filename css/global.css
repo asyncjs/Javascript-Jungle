@@ -3,6 +3,15 @@ body {
   padding : 0;
 }
 
+a { color : #fff; }
+
+span#time {
+  display : absolute;
+  font-size : 14px;
+  left : 15px;
+  top : 15px;
+}
+
 div#jungle {
   /* Change depending on time of day */
   background-color : #000;

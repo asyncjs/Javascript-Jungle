@@ -29,11 +29,11 @@ jj.createCreature("chat", function (creature) {
         */
         
         report = jQuery("<li class='chat-entry'></li>");
-        nameElem = jQuery("<span class='chat-name'></span>").text(eventName);
+        nameElem = jQuery("<span class='chat-name'></span>").html(eventName);
         
         if (message){
             delimElem = jQuery("<span class='chat-delimiter'>: </span>");
-            messageElem = jQuery("<span class='chat-message'></span>").text(message);
+            messageElem = jQuery("<span class='chat-message'></span>").html(message);
         }
         
         report.append(nameElem, delimElem, messageElem).appendTo(logElem);
