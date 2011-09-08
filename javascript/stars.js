@@ -1,14 +1,13 @@
   jj.createCreature('stars', function (layer) {
     // the div element for the layer.
     var el = layer.el;
-    var jq = jj.jQuery;
     layer.size({ width: '100%', height: '30%'});
     var w = layer.size().width, 
         h = layer.size().height;
     var rp = Raphael(el[0],w,h);
     var stars = [];
     jj.bind('clock', function(hr,m) {
-      if((hr>21 || hr<7) && m%2) {
+      if((hr>21 || hr<7) && m%10===0) {
         stars.push(
           rp.circle( 
             Math.floor(Math.random()*w),

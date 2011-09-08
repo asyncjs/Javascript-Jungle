@@ -28,6 +28,9 @@ jj.createCreature('clock', function (layer) {
       hours = 0;
     }
   });
-
+  var el = jj.jQuery("span#time");
+  jj.bind('clock', function(hr,m) {
+    el.html([hr,m].join(':'));
+  });
   layer.el.remove();
 });
