@@ -1,4 +1,9 @@
 jj.createCreature('grass', function (layer) {
+
+    layer.data({
+        background: true
+    });
+
   // the div element for the layer.
   var el = layer.el;
   var jq = jj.jQuery;
