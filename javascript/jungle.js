@@ -94,11 +94,11 @@
 
   events = {
     crash : function (name, error) {
-      // var error 
-      // window.console.log([
-      //   name + " failed at evolution",
-      //   error.name + ': ' + error.message
-      // ]);
+      window.console.log([
+        name + " failed at evolution",
+        error.name + ': ' + error.message,
+        error.stack ? error.stack.join('\n') : "no stack"
+      ]);
     }
   };
 
