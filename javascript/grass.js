@@ -56,6 +56,7 @@ jj.createCreature('grass', function (layer) {
       curGrowth -= 20;
       grass.animate({path: gen_path(curGrowth)}, 1000);
       grass2.animate({path: gen_path(curGrowth-60,10)}, 1000);
+      jj.trigger('eaten',layer);
       return 20;
     }
     //provide food amount as return
