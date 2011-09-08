@@ -8,7 +8,7 @@ jj.createCreature("chat", function (layer) {
         styleElem = jQuery("<style/>").appendTo("head");
 
     layer
-        .size({width:"300px", height:"100%"})
+        .size({width:"220px", height:"100%"})
         .position({right:0, top:0, zIndex:999999});
     
     styleElem.text(

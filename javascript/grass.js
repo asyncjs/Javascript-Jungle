@@ -41,15 +41,17 @@ jj.createCreature('grass', function (layer) {
     curGrowth += 20;
     grass.animate({path: gen_path(curGrowth)}, 1000);
     grass2.animate({path: gen_path(curGrowth-60,10)}, 1000);
+    jj.trigger('grow',layer);
   });
 
   jj.bind('rain',function() {
     curGrowth += 50;
     grass.animate({path: gen_path(curGrowth)}, 1000);
     grass2.animate({path: gen_path(curGrowth-60,10)}, 1000);
+    jj.trigger('grow',layer);
   });
 
-  jj.bind('eaten',function() {
+  layer.bind('eat',function() {
     if(curGrowth>20) {
       curGrowth -= 20;
       grass.animate({path: gen_path(curGrowth)}, 1000);
