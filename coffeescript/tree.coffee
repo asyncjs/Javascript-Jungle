@@ -7,9 +7,9 @@ class Tree
   y: 400
   max_sub_branch: 5
   max_sub_angle: 3*Math.PI/4
-  max_size: 6
-  branch_length: 200
-  color: "#754121"
+  max_size: 7
+  branch_length: 110
+  color: "#553111"
   _makeBranch: (start_x, start_y, length, angle, size) ->
     if size > 0
       @context.lineWidth = size*2

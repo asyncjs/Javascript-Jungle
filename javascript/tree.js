@@ -12,9 +12,9 @@
     Tree.prototype.y = 400;
     Tree.prototype.max_sub_branch = 5;
     Tree.prototype.max_sub_angle = 3 * Math.PI / 4;
-    Tree.prototype.max_size = 6;
-    Tree.prototype.branch_length = 200;
-    Tree.prototype.color = "#754121";
+    Tree.prototype.max_size = 7;
+    Tree.prototype.branch_length = 110;
+    Tree.prototype.color = "#553111";
     Tree.prototype._makeBranch = function(start_x, start_y, length, angle, size) {
       var branch_length_dimin, end_x, end_y, i, newAngle, newLength, newSize, sub_branch;
       if (size > 0) {
