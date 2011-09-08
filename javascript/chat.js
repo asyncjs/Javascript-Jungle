@@ -1,13 +1,13 @@
-jj.createCreature("chat", function (layer) {
+jj.createCreature("chat", function (creature) {
     "use strict";
 
     // the div element for the layer.
     var jQuery = jj.jQuery,
-        element = layer.el,
+        element = creature.el,
         logElem = jQuery("<ul class='chat'></ul>").appendTo(element),
         styleElem = jQuery("<style/>").appendTo("head");
 
-    layer
+    creature
         .size({width:"220px", height:"100%"})
         .position({right:0, top:0, zIndex:999999});
     
@@ -19,9 +19,7 @@ jj.createCreature("chat", function (layer) {
         ".chat .chat-message{ color:#ff9; font-weight:bold; }"
     );
     
-    logElem.append("<li class='chat-entry'><span class='chat-name'>asyncjs</span><span class='chat-delimiter'>: </span><span class='chat-message'>Welcome to the JavaScript Jungle</span></li>");
-
-    jj.bind("all", function(eventName, message){
+    creature.log = function(eventName, message){
         var nameElem, delimElem, messageElem, report;
     
         /*
@@ -39,5 +37,11 @@ jj.createCreature("chat", function (layer) {
         }
         
         report.append(nameElem, delimElem, messageElem).appendTo(logElem);
-    });
+        logElem[0].scrollTop = logElem.height();
+    };
+    
+    creature.log("asyncjs", "Welcome to the JavaScript Jungle");
+    creature.bind("log", creature.log);
+
+    jj.bind("all", creature.log);
 });
