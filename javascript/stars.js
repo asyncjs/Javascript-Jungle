@@ -7,22 +7,24 @@
     var rp = Raphael(el[0],w,h);
     var stars = [];
     jj.bind('clock', function(hr,m) {
-      if((hr>20) && m%10===0) {
-        stars.push(
-          rp.circle( 
-            Math.floor(Math.random()*w),
-            Math.floor(Math.random()*h),
-            hr>23 ? 2 : 1
-          ).attr({
-            stroke:'#fff',
-            fill: '#fff'
-          })
-        );
-      } else if(hr < 5) {
-        //remove stars
-        var nxt = stars.pop();
-        if(nxt) {
-          nxt.remove();
+      if(m%10===0) {
+        if((hr>20)) {
+          stars.push(
+            rp.circle( 
+              Math.floor(Math.random()*w),
+              Math.floor(Math.random()*h),
+              hr>22 ? 2 : 1
+            ).attr({
+              stroke:'#fff',
+              fill: '#fff'
+            })
+          );
+        } else if(hr < 5) {
+          //remove stars
+          var nxt = stars.pop();
+          if(nxt) {
+            nxt.remove();
+          }
         }
       }
     });
