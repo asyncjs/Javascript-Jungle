@@ -7,12 +7,14 @@ jj.createCreature('clock', function (layer) {
     '13': 'lunch',
     '19': 'dinner',
     '21': 'nighttime'
-  };
+  }, data = layer.data();
+
+  layer.data({speed: 5});
 
   // Create a clock that moves six times faster than normal.
   // eg. 10 mins = 1 hour.
   jj.bind('tick', function (frame) {
-    if (frame % 5 === 0) {
+    if (frame % data.speed === 0) {
       jj.trigger('clock', hours, minutes);
       if (minutes === 0 && events[hours]) {
         jj.trigger(events[hours]);
@@ -28,6 +30,7 @@ jj.createCreature('clock', function (layer) {
       hours = 0;
     }
   });
+
   var el = jj.jQuery("span#time");
   jj.bind('clock', function(hr,m) {
     el.html([hr,m].join(':'));
