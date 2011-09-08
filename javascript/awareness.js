@@ -26,7 +26,7 @@
         return intersectors;
     }
 
-    jj.createLayer('awareness', function (layer) {
+    jj.createCreature('awareness', function (layer) {
 
         layer.size({width: 0, height: 0});
 
