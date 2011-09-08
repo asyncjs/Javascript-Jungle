@@ -61,7 +61,7 @@
       //element.css(jj.size());
 
       try {
-        callback(creature);
+        callback.call(creature, creature);
         creatures[name] = creature.readonly();
       } catch (error) {
         jj.trigger('crash', name, error);
