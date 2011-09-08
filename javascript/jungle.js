@@ -94,11 +94,11 @@
 
   events = {
     crash : function (name, error) {
-      var error 
-      window.console.log([
-        name + " failed at evolution",
-        error.name + ': ' + error.message
-      ]);
+      // var error 
+      // window.console.log([
+      //   name + " failed at evolution",
+      //   error.name + ': ' + error.message
+      // ]);
     }
   };
 
@@ -217,6 +217,6 @@
   })();
 
   // Load the list
-  jj.load(CREATURE_URL_LIST);
+  //jj.load(CREATURE_URL_LIST);
 
 })(this.jQuery, this.Broadcast, this);
