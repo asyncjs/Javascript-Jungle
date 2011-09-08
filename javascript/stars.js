@@ -13,7 +13,7 @@
             rp.circle( 
               Math.floor(Math.random()*w),
               Math.floor(Math.random()*h),
-              hr>22 ? 2 : 1
+              hr>22 ? 1 : 2
             ).attr({
               stroke:'#fff',
               fill: '#fff'
