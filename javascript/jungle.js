@@ -186,16 +186,25 @@
     // Returns a readonly version of the creature. None of the setters will
     // have any effect.
     readonly: function () {
-      var creature = this, readable = {};
+      var creature = this, readable = {},
+          methods = {name: 1, data: 1, position: 1, size: 1},
+          method;
 
-      $.each(['name', 'data', 'position', 'size'], function (index, method) {
+      for (method in creature) {
+        if (!methods[method]) {
+          if (typeof readable[method] === 'function') {
+            readable[method] = $.proxy(creature[method], creature);
+          } else {
+            readable[method] = creature[method];
+          }
+        }
+      }
+
+      // Redefine the readonly methods.
+      $.each(methods, function (method) {
         readable[method] = function () {
           return creature[method]();
         };
-      });
-
-      $.each(['bind', 'unbind', 'trigger'], function (index, method) {
-        readable[method] = $.proxy(creature[method], creature);
       });
 
       return readable;
