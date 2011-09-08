@@ -94,7 +94,11 @@
 
   events = {
     crash : function (name, error) {
-      window.console.log(name + " failed at evolution: " + error);
+      var error 
+      window.console.log([
+        name + " failed at evolution",
+        error.name + ': ' + error.message
+      ]);
     }
   };
 
