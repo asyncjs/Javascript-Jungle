@@ -1,4 +1,9 @@
   jj.createCreature('stars', function (layer) {
+
+    layer.data({
+        background: true
+    });
+
     // the div element for the layer.
     var el = layer.el;
     layer.size({ width: '100%', height: '30%'});

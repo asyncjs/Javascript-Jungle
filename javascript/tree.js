@@ -40,6 +40,11 @@
   })();
   jj.createCreature('trees', function(layer) {
     var canvas;
+
+    layer.data({
+        background: true
+    });
+
     layer.size({
       width: '100%',
       height: '100%'
