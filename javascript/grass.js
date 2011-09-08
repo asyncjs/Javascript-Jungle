@@ -51,18 +51,22 @@ jj.createCreature('grass', function (layer) {
     jj.trigger('grow',layer);
   });
 
-  layer.bind('eat',function() {
+  layer.length = function () {
+    return curGrowth;
+  }
+
+  layer.eat = function () {
     if(curGrowth>20) {
       curGrowth -= 20;
       grass.animate({path: gen_path(curGrowth)}, 1000);
       grass2.animate({path: gen_path(curGrowth-60,10)}, 1000);
-      jj.trigger('eaten',layer);
+      jj.trigger('eaten', layer);
       return 20;
     }
     //provide food amount as return
     return 0;
-  }); 
-  
+  };
+
 });
 
 
