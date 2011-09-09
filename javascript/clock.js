@@ -9,7 +9,7 @@ jj.createCreature('clock', function (layer) {
     '21': 'nighttime'
   }, data = layer.data();
 
-  layer.data({speed: 5});
+  layer.data({speed: 5, background: true});
 
   // Create a clock that moves six times faster than normal.
   // eg. 10 mins = 1 hour.

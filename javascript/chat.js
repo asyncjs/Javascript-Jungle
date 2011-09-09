@@ -9,7 +9,8 @@ jj.createCreature("chat", function (creature) {
 
     creature
         .size({width:"220px", height:"100%"})
-        .position({right:0, top:0, zIndex:999999});
+        .position({right:0, top:0, zIndex:999999})
+        .data({background: true});
     
     styleElem.text(
         ".chat {list-style-type:none; padding:0.5em 1em; margin:0; font-family:monospace; overflow:auto; height:100%; opacity:0.7; color:#fff; background-color:#000; }" +
