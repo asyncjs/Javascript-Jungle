@@ -210,7 +210,7 @@
         };
       }
       if (position.top)    { attr.top    = position.top;    }
-      if (position.left)   { attr.top    = position.left;   }
+      if (position.left)   { attr.left   = position.left;   }
       if (position.zindex) { attr.zindex = position.zindex; }
       return this._dirty();
     },
