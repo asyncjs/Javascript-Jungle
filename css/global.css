@@ -25,6 +25,14 @@ div#jungle {
 
 .creature {
   position: absolute;
+  
+  /* hardware accelration hinting */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -khtml-transform: translateZ(0);
 }
 
 div.droplet1 {
