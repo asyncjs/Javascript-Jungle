@@ -6,7 +6,11 @@
 
     // the div element for the layer.
     var el = layer.el;
-    layer.size({ width: '100%', height: '30%'});
+    var world = jj.size();
+    layer.size({
+      width:  world.width,
+      height: world.height
+    });
     var w = layer.size().width, 
         h = layer.size().height;
     var rp = Raphael(el[0],w,h);

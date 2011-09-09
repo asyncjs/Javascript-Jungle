@@ -39,15 +39,16 @@
     return Tree;
   })();
   jj.createCreature('trees', function(layer) {
-    var canvas;
+    var canvas, world;
 
     layer.data({
         background: true
     });
 
+    world = jj.size();
     layer.size({
-      width: '100%',
-      height: '100%'
+      width:  world.width,
+      height: world.height
     });
     canvas = document.createElement('canvas');
     layer.el.append(canvas);

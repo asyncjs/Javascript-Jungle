@@ -8,7 +8,11 @@ jj.createCreature('grass', function (layer) {
   var el = layer.el;
   var jq = jj.jQuery;
   // Set the size of your layer.
-  layer.size({ width: '100%', height: '100%'});
+  var world = jj.size();
+  layer.size({
+    width:  world.width,
+    height: world.height
+  });
   var w = layer.size().width, 
       h = layer.size().height;
   var curGrowth = 0;
