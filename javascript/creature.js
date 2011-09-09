@@ -1,13 +1,15 @@
-jj.createCreature('creature', function (layer) {
+jj.createCreature('creature', function (creature) {
   var canvas = document.createElement('canvas'),
       context = canvas.getContext('2d'),
       width   = canvas.width  = 100,
       height  = canvas.height = 100,
-      world   = jj.size();
+      world   = jj.size(),
+      top = 50,
+      left = jj.center().left - (width / 2);
 
-  layer.size({width: width, height: height});
-  layer.position({top: 50, left: jj.center().left - (width / 2)});
-  layer.el.append(canvas);
+  creature.size({width: width, height: height});
+  creature.position({top: top, left: left});
+  creature.el.append(canvas);
 
   context.fillStyle = "#8ED6FF";
   context.beginPath();
@@ -16,12 +18,16 @@ jj.createCreature('creature', function (layer) {
   context.fill();
 
   jj.bind('tick', function () {
-    if (layer.position().top > world.height) {
-      layer.position({top: -height});
+    if (top > world.height) {
+      top = -height;
+    } else {
+      top  += 5;
     }
-    if (layer.position().left > world.width) {
-      layer.position({left: -width});
+    if (left > world.width) {
+      left = -width;
+    } else {
+      left += 10;
     }
-    layer.position({top: '+= 5px', left: '+= 10px'});
+    creature.position({top: top, left: left});
   });
 });
