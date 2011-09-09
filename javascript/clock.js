@@ -32,12 +32,11 @@ jj.createCreature('clock', function (layer) {
   });
 
   var el = jj.jQuery("span#time");
-  jj.bind('clock', function(hr,m) {
-    console.log(hr.length);
+  jj.bind('clock', function (hr, m) {
     el.html([
-      hr < 10 ? '0' + hr : hr ,
-      m < 10 ? '0' + m : m]
-        .join(':'));
+      hr < 10 ? '0' + hr : hr,
+      m  < 10 ? '0' + m  : m
+    ].join(':'));
   });
   layer.el.remove();
 });
