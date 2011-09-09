@@ -215,6 +215,16 @@
       return this._dirty();
     },
 
+    // Centers the creature in the world.
+    center: function () {
+      var worldCenter = jj.center();
+      this.position({
+        left: worldCenter.left - (this.width()  / 2),
+        top:  worldCenter.top  - (this.height() / 2) 
+      });
+      return this;
+    },
+
     // Returns a readonly version of the creature. None of the setters will
     // have any effect.
     readonly: function () {
