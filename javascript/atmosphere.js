@@ -1,7 +1,7 @@
 jj.createCreature('atmosphere', function (layer) {
   // we don't need layer for this as it's provided.
   layer.el.remove();
-  layer.data({background: true;});
+  layer.data({background: true});
   var el = jj.jQuery('div#jungle');
   jj.bind('clock', function(hr,m) {
     if(m%10===0) {
