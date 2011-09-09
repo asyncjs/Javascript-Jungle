@@ -120,7 +120,7 @@
     this._data = {};
   }
 
-  Creature.prototype = Object.create(Events);
+  Creature.prototype = new Events({alias: false});
   $.extend(Creature.prototype, {
     // Reassign the constructor.
     constructor: Creature,
