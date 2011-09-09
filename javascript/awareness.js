@@ -56,6 +56,7 @@
 
         // HACK! make awareness creature invisible
         creature.size({width: 0, height: 0});
+        creature.data({background: true});
 
         jj.bind('tick', function (frame) {
 
