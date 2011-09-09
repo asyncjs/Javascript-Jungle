@@ -62,7 +62,11 @@
 
       try {
         callback.call(creature, creature);
-        creatures[name] = creature.readonly();
+
+        // HACK! jim: don't make creature readonly to allow alien abductions. 
+        // creatures[name] = creature.readonly()
+        creatures[name] = creature;
+
       } catch (error) {
         jj.trigger('crash', name, error);
       }
