@@ -118,6 +118,16 @@
     this.el = element;
     this._name = name;
     this._data = {};
+    this._style = element.style;
+    this._size = {
+        width:0,
+        height:0
+    };
+    this._position = {
+        top: 0,
+        left: 0,
+        zIndex: 0
+    };
   }
 
   Creature.prototype = new Events({alias: false});
@@ -157,14 +167,16 @@
     //
     size: function (size) {
       if (!size) {
-        return {
-          width:  this.el.width(),
-          height: this.el.height()
-        };
+        return this._size;
       }
       
-      size.width  && this.el.css("width", size.width);
-      size.height && this.el.css("height", size.height);
+      this.el.css(size);
+      // Recalculate dimensions, in case of relative CSS units
+      this._size = {
+        width:  this.el.width(),
+        height: this.el.height()
+      };
+      
       return this;
     },
 
@@ -179,10 +191,9 @@
     //
     position: function (position) {
       if (!position) {
-        return $.extend(this.el.offset(), {
-          zIndex: this.el.css('z-index') || 0
-        });
+        return this._position;
       }
+      $.extend(this._position, position);
       this.el.css(position);
       return this;
     },
