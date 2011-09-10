@@ -3,13 +3,15 @@
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
       creatures = {}, jj = {}, events = {},
-      CREATURE_URL_LIST, FRAMERATE;
-
-  // The number of frames/second that the "tick" event will fire.
-  FRAMERATE = 30;
-  
-  // File that contains a list of urls, passed to jungle.load, e.g. jungle.load("http://foo.com/hello.js");
-  CREATURE_URL_LIST = 'http://jsbin.com/uxukok/latest';
+      
+      // File that contains a list of urls, passed to jj.load
+      //CREATURE_URL_LIST = 'http://jsbin.com/uxukok/latest',
+      CREATURE_URL_LIST = false,
+      
+      // The number of frames/second that the "tick" event will fire.
+      FRAMERATE = 30;
+   
+  /////
 
   // Create the global jungle object.
   window.jj = jj = $.extend({}, Events, {
@@ -58,13 +60,8 @@
       var element  = $('<div class="creature" data-id="' + name + '" />').appendTo(jungle),
           creature = new Creature(name, element);
 
-      //element.css(jj.size());
-
       try {
         callback.call(creature, creature);
-
-        // HACK! jim: don't make creature readonly to allow alien abductions. 
-        // creatures[name] = creature.readonly()
         creatures[name] = creature;
 
       } catch (error) {
@@ -80,6 +77,7 @@
     //
     center: function () {
       var size = jj.size();
+      
       return {
         top:  size.height / 2,
         left: size.width / 2
@@ -114,11 +112,10 @@
   // Create a Creature object.
   function Creature(name, element) {
     Events.call(this, {alias: false});
-    jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
+//  jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
     this.el = element;
     this._name = name;
     this._data = {};
-    this._style = element.style;
     this._size = {
         width:0,
         height:0
@@ -149,11 +146,12 @@
     //   creature.data().foodstuffs; //=> {foodstuffs: ['Apples', 'Oranges', 'Pears']}
     //
     data: function (data) {
-      if (data) {
-        $.extend(this._data, data);
-        return this;
+      if (!data) {
+        return this._data;
       }
-      return this._data;
+      
+      $.extend(this._data, data);
+      return this;
     },
 
     // Allows get/setting of creature element width/height. Accepts the same
@@ -170,12 +168,15 @@
         return this._size;
       }
       
+      // Recalculate dimensions, if relative CSS units used
+      if (typeof size.width === "string"){
+        this._size.width = this.el.width();
+      }
+      if (typeof size.height === "string"){
+        this._size.height = this.el.height();
+      }
+      
       this.el.css(size);
-      // Recalculate dimensions, in case of relative CSS units
-      this._size = {
-        width:  this.el.width(),
-        height: this.el.height()
-      };
       
       return this;
     },
@@ -193,7 +194,17 @@
       if (!position) {
         return this._position;
       }
-      $.extend(this._position, position);
+      
+      if (typeof position.top !== "undefined"){
+        this._position.top = position.top;
+      }
+      if (typeof position.left !== "undefined"){
+        this._position.left = position.left;
+      }
+      if (typeof position.zIndex !== "undefined"){
+        this._position.zIndex = position.zIndex;
+      }
+      
       this.el.css(position);
       return this;
     },
@@ -226,7 +237,7 @@
     }
   });
 
-  // Set a ticker going!s
+  // Set a ticker going!
   (function () {
     var frame = 0, hour = 0, second = 0;
 
@@ -238,9 +249,11 @@
         frame = 0;
       }
     }, 1000 / FRAMERATE);
-  })();
+  }());
 
   // Load the list
-  //jj.load(CREATURE_URL_LIST);
+  if (CREATURE_URL_LIST){
+    jj.load(CREATURE_URL_LIST);
+  }
 
 })(this.jQuery, this.Broadcast, this);
