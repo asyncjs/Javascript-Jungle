@@ -60,7 +60,7 @@ jj.createCreature('grass', function (layer) {
     return curGrowth;
   }
 
-  layer.eat = function () {
+  layer.bind("eat", function () {
     if(curGrowth>20) {
       curGrowth -= 20;
       grass.animate({path: gen_path(curGrowth)}, 1000);
@@ -70,7 +70,7 @@ jj.createCreature('grass', function (layer) {
     }
     //provide food amount as return
     return 0;
-  };
+  });
 
 });
 
