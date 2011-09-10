@@ -44,9 +44,11 @@ div#jungle {
   bottom: 0;
 }
 
-.creature {
+div.creature {
   position: absolute;
-  
+}
+
+div.creature, div.creature img, div.creature svg, div.creature canvas {  
   /* hardware accelration hinting */
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
