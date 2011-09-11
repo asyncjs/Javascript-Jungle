@@ -5,7 +5,9 @@ jj.createCreature("chat", function (creature) {
     var jQuery = jj.jQuery,
         element = creature.el,
         logElem = jQuery("<ul class='chat'></ul>").appendTo(element),
+        logEl = logElem[0],
         styleElem = jQuery("<style/>").appendTo("head"),
+        SCROLL_THRESHOLD = 20,
         MIN_WIDTH = 10,
         FULL_WIDTH = 220,
         OPENCLOSE_DELAY = 0.38, // seconds
@@ -34,6 +36,7 @@ jj.createCreature("chat", function (creature) {
     function log(message, creature){
         var creatureName = creature && creature.name ? 
                 creature.name() : creature || "anon",
+            doScroll = (logEl.scrollHeight - logEl.scrollTop - logElem.height()) <= SCROLL_THRESHOLD,
             nameElem, delimElem, messageElem, report;
         
         report = jQuery("<li class='chat-entry'></li>");
@@ -45,7 +48,9 @@ jj.createCreature("chat", function (creature) {
         }
         
         report.append(nameElem, delimElem, messageElem).appendTo(logElem);
-        logElem[0].scrollTop = logElem.height();
+        if (doScroll){
+            logEl.scrollTop = logEl.scrollHeight;
+        }
     };
     
     logElem.click(function(event){
