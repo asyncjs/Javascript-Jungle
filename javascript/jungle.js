@@ -217,10 +217,11 @@
         return this._position;
       }
       
-      if (typeof position.top !== "undefined"){
+      // NOTE: only numbers are allowed
+      if (typeof position.top === "number"){
         this._position.top = position.top;
       }
-      if (typeof position.left !== "undefined"){
+      if (typeof position.left === "number"){
         this._position.left = position.left;
       }
       if (typeof position.zIndex !== "undefined"){
