@@ -1,4 +1,6 @@
 (function (jQuery, Broadcast, window) {
+  "use strict";
+
   var $ = jQuery.noConflict(true),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
@@ -15,6 +17,11 @@
 
   // Create the global jungle object.
   window.jj = jj = $.extend({}, Events, {
+    _size: {
+        width: jungle.width(),
+        height: jungle.height()
+    },
+  
     // Gets a particular creature by the name or null if not found.
     //
     //   var prem = jj.get('prem');
@@ -52,21 +59,39 @@
     //   });
     //
     createCreature: function (name, callback) {
+      var element, creature;
+    
       if (creatures[name]) {
         window.console.warn('The creature "%s" already exists!');
         return;
       }
 
-      var element  = $('<div class="creature" data-id="' + name + '" />').appendTo(jungle),
-          creature = new Creature(name, element);
+      element  = $('<div class="creature" data-id="' + name + '" />').appendTo(jungle);
+      creature = new Creature(name, element);
 
       try {
         callback.call(creature, creature);
         creatures[name] = creature;
 
-      } catch (error) {
+      }
+      catch (error) {
         jj.trigger('crash', name, error);
       }
+      
+      return this;
+    },
+
+    // Returns the size (width/height) of the environment.
+    size: function () {
+      return this._size;
+    },
+    
+    recalculateSize: function(){
+        this._size = {
+            width: jungle.width(),
+            height: jungle.height()
+        };
+        return this;
     },
 
     // Returns the position (top/left/zIndex) of the center of the
@@ -83,16 +108,12 @@
         left: size.width / 2
       };
     },
-
-    // Returns the size (width/height) of the environment.
-    size: function () {
-      return {
-        width:  jungle.width(),
-        height: jungle.height()
-      };
-    },
+    
+    // jQuery object
     jQuery: $       
   });
+  
+  /////
 
   events = {
     crash : function (name, error) {
@@ -175,9 +196,8 @@
       if (typeof size.height === "string"){
         this._size.height = this.el.height();
       }
-      
       this.el.css(size);
-      
+
       return this;
     },
 
@@ -204,8 +224,8 @@
       if (typeof position.zIndex !== "undefined"){
         this._position.zIndex = position.zIndex;
       }
-      
       this.el.css(position);
+
       return this;
     },
     
