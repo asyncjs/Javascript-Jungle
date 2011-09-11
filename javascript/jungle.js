@@ -189,6 +189,9 @@
         return this._size;
       }
       
+      // Set new size
+      this.el.css(size);
+      
       // Recalculate dimensions, if relative CSS units used
       if (typeof size.width === "string"){
         this._size.width = this.el.width();
@@ -196,7 +199,6 @@
       if (typeof size.height === "string"){
         this._size.height = this.el.height();
       }
-      this.el.css(size);
 
       return this;
     },
