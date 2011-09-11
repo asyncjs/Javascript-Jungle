@@ -80,6 +80,11 @@ jj.createCreature("chat", function (creature) {
     
     // jj.chat("foo", creature);
     jj.chat = log;
+    
+    creature.constructor.prototype.chat = function(message){
+        log(message, this);
+        return this;
+    };
 
     // Publish all global events
     jj.bind("all", function(eventName, creature){
