@@ -4,7 +4,7 @@
   var $ = jQuery.noConflict(true),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
-      creatures = {}, jj = {}, events = {},
+      creatures = {}, jj = {},
       
       // File that contains a list of urls, passed to jj.load
       //CREATURE_URL_LIST = 'http://jsbin.com/uxukok/latest',
@@ -18,6 +18,9 @@
   // Create the global jungle object.
   window.jj = jj = $.extend({}, Events, {
     fps: FRAMERATE,
+    
+    // jQuery object
+    jQuery: $,
   
     _size: {
         width: jungle.width(),
@@ -116,31 +119,69 @@
       };
     },
     
-    // jQuery object
-    jQuery: $       
+    isRunning: false,
+    
+    _tickRef: null,    
+    _tick: (function(){
+      var frame = 0;
+      
+      return function(){
+        jj.trigger("tick", frame);
+
+        frame = (frame !== jj.fps) ? frame + 1 : 0;
+        // Using setTimeout instead of setInterval to allow in-runtime fps-bending
+        jj._tickRef = window.setTimeout(jj._tick, 1000 / jj.fps);
+      };
+    }()),
+    
+    start: function(){
+      this.isRunning = true;
+      
+      return this
+        .trigger("start")
+        ._tick();
+    },
+    
+    stop: function(){
+      this.isRunning = false;
+      window.clearTimeout(this._tickRef);
+      this._tickRef = null;
+      return this.trigger("stop");
+    },
+    
+    init: function(){
+      var events = {
+        crash : function (name, error) {
+          window.console.log([
+            name + " failed at evolution",
+            error.name + ': ' + error.message,
+            error.stack ? error.stack.join('\n') : "no stack"
+          ]);
+        }
+      };
+    
+      // Bind default events.
+      $.each(events, function (n, cb) {
+        jj.bind(n, cb);
+      });
+    
+      // Load the list of creatures
+      if (CREATURE_URL_LIST){
+        this.load(CREATURE_URL_LIST);
+      }
+      
+      // Set a ticker going
+      return this.start();
+    }
   });
   
+  
   /////
-
-  events = {
-    crash : function (name, error) {
-      window.console.log([
-        name + " failed at evolution",
-        error.name + ': ' + error.message,
-        error.stack ? error.stack.join('\n') : "no stack"
-      ]);
-    }
-  };
-
-  // Bind default events.
-  $.each(events, function (n, cb) {
-    jj.bind(n, cb);
-  });
+  
   
   // Create a Creature object.
   function Creature(name, element) {
     Events.call(this, {alias: false});
-//  jj.bind('tick', $.proxy(this.trigger, this, 'tick'));
     this.el = element;
     this._name = name;
     this._data = {};
@@ -309,24 +350,9 @@
       return readable;
     }
   });
+  
+  /////
 
-  // Set a ticker going!
-  (function () {
-    var frame = 0;
-
-    window.setInterval(function () {
-      jj.trigger('tick', frame);
-
-      frame += 1;
-      if (frame >= FRAMERATE) {
-        frame = 0;
-      }
-    }, 1000 / FRAMERATE);
-  }());
-
-  // Load the list
-  if (CREATURE_URL_LIST){
-    jj.load(CREATURE_URL_LIST);
-  }
+  jj.init();
 
 }(this.jQuery, this.Broadcast, this));

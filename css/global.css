@@ -15,6 +15,7 @@ span#time {
   padding : 5px;
   background-color: #000;   opacity: 0.5;
   z-index:9999;
+  cursor:pointer;
 }
 
 h2 {
