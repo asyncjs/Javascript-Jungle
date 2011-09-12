@@ -10,8 +10,9 @@
             return intersectors;
         }
 
-        var t_pos = creature.position();
+        var t_pos = $.extend({}, creature.position());
         var t_size = creature.size();
+        
         if (! range) {
 
             var t_x = [t_pos.left, t_pos.left + t_size.width];
@@ -55,7 +56,6 @@
     jj.createCreature('awareness', function (creature) {
 
         // HACK! make awareness creature invisible
-        creature.size({width: 0, height: 0});
         creature.data({background: true});
 
         jj.bind('tick', function (frame) {
