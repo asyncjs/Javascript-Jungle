@@ -46,9 +46,14 @@
     },
 
     // Loads args.
-    load: function () {
+    load: function (callback) {
       $.each(arguments, function (i, url) {
-        $.getScript(url);
+        $.ajax({
+          url: url,
+          dataType: "script",
+          crossDomain: "true",
+          success: callback
+        });
       });
     },
 
