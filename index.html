@@ -12,13 +12,27 @@
         <h2 id="oururi">jungle.asyncjs.com</h2>
 	</div>
 	
-	<script src="javascript/lib/jquery.js"></script>
-    <script src="javascript/lib/raphael.min.js"></script>
-	<script src="javascript/lib/paper.js"></script>
-	<script src="javascript/lib/broadcast.js"></script>
-	
-	<script src="javascript/jungle.js?v3"></script>
-	<script src="javascript/awareness.js"></script>
-	<script src="javascript/creatures.js?v3"></script>
+	<script src="javascript/lib/getscript.js"></script>
+	<script>
+	    getScript(
+	        // Libraries
+	        [
+	            "lib/jquery.js",
+	            "lib/raphael.min.js",
+	            "lib/paper.js",
+	            "lib/broadcast.js"
+	        ],
+	        
+	        // Core scripts
+	        "jungle.js?v3",
+	        "awareness.js?v3",
+	        
+	        // Creatures are added to creatures.js
+	        "creatures.js?v3",
+	        
+	        // Load options (include `noCache:true` to prevent caching, while debugging)
+    	    {path:"javascript/"}
+	    );
+	</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-(function (jQuery, Broadcast, window) {
+(function (jQuery, Broadcast, getScript, window) {
   "use strict";
 
   var $ = jQuery.noConflict(true),
@@ -49,16 +49,7 @@
     },
 
     // Loads args.
-    load: function (callback) {
-      $.each(arguments, function (i, url) {
-        $.ajax({
-          url: url,
-          dataType: "script",
-          crossDomain: "true",
-          success: callback
-        });
-      });
-    },
+    load: getScript,
 
     // Creates a new Creature in the environment. This is the main method that
     // will be used to populate the environment.
@@ -355,4 +346,4 @@
 
   jj.init();
 
-}(this.jQuery, this.Broadcast, this));
+}(this.jQuery, this.Broadcast, this.getScript, this));

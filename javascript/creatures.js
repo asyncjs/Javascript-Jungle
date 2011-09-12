@@ -7,26 +7,31 @@
 
     // Standard creatures
     jj.load(
-        "javascript/atmosphere.js",
-        "javascript/chat.js",
-        "javascript/clock.js",
-        "javascript/stars.js",
-        "javascript/tree.js",
-        "javascript/grass.js"
+        "clock.js",
+        "chat.js",
+        "grass.js",
+        "tree.js",
+        "atmosphere.js",
+        "stars.js",
+        
+        function(){
+            // Creatures from the community
+            if (!hasSearchParam("dev")){
+              jj.load(
+                "https://raw.github.com/gist/1204436/", // triangula
+                "https://raw.github.com/gist/1204505/", // sun
+                "https://raw.github.com/gist/1204620/", // butterfly_colmjude.js
+                "https://raw.github.com/gist/1204683/", // happygiraffe-snowman
+                "https://raw.github.com/gist/1204698/", // happydog
+                "https://raw.github.com/gist/1204788/", // flocking birds (almost-boid)
+                "https://raw.github.com/gist/1204932/", // toucan @rakugojon
+                "https://raw.github.com/gist/1206090/", // ufo @JimPurbrick
+                "https://raw.github.com/gist/1208781/"  // angrybird @rakugojon
+              );
+            }
+        },
+        
+        // Load options (include `noCache:true` to prevent caching, while debugging)
+    	{path:"javascript/"}
     );
-
-    // Creatures from the community
-    if (!hasSearchParam("dev")){
-      jj.load(
-        "https://raw.github.com/gist/1204436/", // triangula
-        "https://raw.github.com/gist/1204505/", // sun
-        "https://raw.github.com/gist/1204620/", // butterfly_colmjude.js
-        "https://raw.github.com/gist/1204683/", // happygiraffe-snowman
-        "https://raw.github.com/gist/1204698/", // happydog
-        "https://raw.github.com/gist/1204788/", // flocking birds (almost-boid)
-        "https://raw.github.com/gist/1204932/", // toucan @rakugojon
-        "https://raw.github.com/gist/1206090/", // ufo @JimPurbrick
-        "https://raw.github.com/gist/1208781/"  // angrybird @rakugojon
-      );
-    }
 }());
