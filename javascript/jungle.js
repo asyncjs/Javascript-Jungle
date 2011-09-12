@@ -11,12 +11,14 @@
       CREATURE_URL_LIST = false,
       
       // The number of frames/second that the "tick" event will fire.
-      FRAMERATE = 30;
+      FRAMERATE = 25;
    
   /////
 
   // Create the global jungle object.
   window.jj = jj = $.extend({}, Events, {
+    fps: FRAMERATE,
+  
     _size: {
         width: jungle.width(),
         height: jungle.height()
@@ -185,6 +187,8 @@
     //   creature.size(); //=> {width: 20, height: 40}
     //
     size: function (size) {
+      var typeWidth, typeHeight;
+    
       if (!size) {
         return this._size;
       }
@@ -192,11 +196,23 @@
       // Set new size
       this.el.css(size);
       
+      // WIDTH
+      typeWidth = typeof size.width;      
+      if (typeWidth === "number"){
+        this._size.width = size.width;
+      }
       // Recalculate dimensions, if relative CSS units used
-      if (typeof size.width === "string"){
+      else if (typeof size.width === "string"){
         this._size.width = this.el.width();
       }
-      if (typeof size.height === "string"){
+      
+      // HEIGHT
+      typeHeight = typeof size.height;
+      if (typeHeight === "number"){
+        this._size.height = size.height;
+      }
+      // Recalculate dimensions, if relative CSS units used
+      else if (typeHeight === "string"){
         this._size.height = this.el.height();
       }
 
@@ -217,17 +233,19 @@
         return this._position;
       }
       
-      // NOTE: only numbers are allowed
+      // Set new position
+      this.el.css(position);
+      
+      // NOTE: only numbers are permitted
       if (typeof position.top === "number"){
         this._position.top = position.top;
       }
       if (typeof position.left === "number"){
         this._position.left = position.left;
       }
-      if (typeof position.zIndex !== "undefined"){
+      if (typeof position.zIndex === "number"){
         this._position.zIndex = position.zIndex;
       }
-      this.el.css(position);
 
       return this;
     },
