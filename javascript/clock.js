@@ -27,7 +27,6 @@ jj.createCreature('clock', function (layer) {
         (minutes  < 10 ? '0' + minutes  : minutes)
       );
       
-      // jj.bind('clock', function (hours, minutes){}
       jj.trigger('clock', hours, minutes);
       
       if (minutes === 0 && events[hours]) {
