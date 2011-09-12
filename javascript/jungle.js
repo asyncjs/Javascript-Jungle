@@ -207,7 +207,7 @@
         this._size.width = size.width;
       }
       // Recalculate dimensions, if relative CSS units used
-      else if (typeof size.width === "string"){
+      else if (typeWidth === "string"){
         this._size.width = this.el.width();
       }
       
@@ -225,7 +225,7 @@
     },
 
     // Allows get/setting of creature element top/left/zIndex. Accepts the same
-    // values as jQuery.css() would expect.
+    // values as jQuery.css() would expect. If possible, use only numbers, not strings.
     //
     //   // Set yr sizes here.
     //   creature.position({top: 20, left: 40});
@@ -234,6 +234,8 @@
     //   creature.position(); //=> {top: 20, left: 40, zIndex: 0}
     //
     position: function (position) {
+      var typeTop, typeLeft, offset;
+    
       if (!position) {
         return this._position;
       }
@@ -241,13 +243,28 @@
       // Set new position
       this.el.css(position);
       
-      // NOTE: only numbers are permitted
-      if (typeof position.top === "number"){
+      // TOP
+      typeTop = typeof position.top;      
+      if (typeTop === "number"){
         this._position.top = position.top;
       }
-      if (typeof position.left === "number"){
+      // Recalculate dimensions, if relative CSS units used
+      else if (typeTop === "string"){
+        offset = this.el.offset();
+        this._position.top = offset.top;
+      }
+      
+      // LEFT
+      typeLeft = typeof position.left;
+      if (typeLeft === "number"){
         this._position.left = position.left;
       }
+      // Recalculate dimensions, if relative CSS units used
+      else if (typeLeft === "string"){
+        this._position.top = offset ? offset.left : this.el.offset().left;
+      }
+      
+      // Z-INDEX
       if (typeof position.zIndex === "number"){
         this._position.zIndex = position.zIndex;
       }
@@ -273,7 +290,7 @@
           method;
 
       for (method in creature) {
-        if (!methods[method]) {
+        if (creature.hasOwnPropery(method) && !methods[method]) {
           if (typeof readable[method] === 'function') {
             readable[method] = $.proxy(creature[method], creature);
           } else {
@@ -295,9 +312,9 @@
 
   // Set a ticker going!
   (function () {
-    var frame = 0, hour = 0, second = 0;
+    var frame = 0;
 
-    setInterval(function () {
+    window.setInterval(function () {
       jj.trigger('tick', frame);
 
       frame += 1;
@@ -312,4 +329,4 @@
     jj.load(CREATURE_URL_LIST);
   }
 
-})(this.jQuery, this.Broadcast, this);
+}(this.jQuery, this.Broadcast, this));
