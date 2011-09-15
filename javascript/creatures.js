@@ -26,7 +26,8 @@
                 "https://raw.github.com/gist/1204788/", // flocking birds (almost-boid)
                 "https://raw.github.com/gist/1204932/", // toucan @rakugojon
                 "https://raw.github.com/gist/1206090/", // ufo @JimPurbrick
-                "https://raw.github.com/gist/1208781/"  // angrybird @rakugojon
+                "https://raw.github.com/gist/1208781/", // angrybird @rakugojon
+                "https://raw.github.com/gist/1218733"   // _lion
               );
             }
         },
