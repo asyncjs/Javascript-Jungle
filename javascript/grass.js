@@ -21,7 +21,7 @@ jj.createCreature('grass', function (layer) {
     for (var i = os; i <= w; i+=20){
       //this can't be random every time.
       //edges grow higher
-      var gh = Math.floor(Math.random()*100) + 70;
+      var gh = Math.floor(Math.random()*100) + 30;
       var eos = Math.abs(i - (w/2));
       if (eos > w/3) gh += parseInt(eos - w/3,10);
       path.push(['L',i,(h - growth - gh )].join(' '));
