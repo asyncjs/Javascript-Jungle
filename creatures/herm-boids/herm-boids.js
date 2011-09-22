@@ -155,6 +155,11 @@
             if (boid.pos.y/SCALE > jj.size().height) {
               boid.vel = {x: 0, y: 0};
             } else {
+              if (boid.vel.x > 0) {
+                layer.el.css('backgroundPosition', "-160px 0"); //face right
+              } else {
+                layer.el.css('backgroundPosition', "-200px 0"); //face right
+              }
               boid.vel = {x: boid.vel.x/1.1, y: boid.vel.y+(1/SCALE)};
             }
           } else {
@@ -188,16 +193,13 @@
           //layer.position({left: lim(pos.x % jj.size().width, 0,jj.size().width) , top: lim(pos.y % jj.size().height, 0, jj.size().height)});
 
         });
-        layer.bind('eat', function () {
+        layer.eat = function () {
           boid.eaten = new Date().getTime();
           jj.chat("Oh noes! I just got eaten :(", layer);
-          if (boid.vel.x > 0) {
-            layer.el.css('backgroundPosition', "-160px 0"); //face right
-          } else {
-            layer.el.css('backgroundPosition', "-200px 0"); //face right
-          }
-        });;
-
+          boid.y = 0;
+          return 4;
+        };
+        layer.bind('eat', layer.eat); 
       });
     })();
   }

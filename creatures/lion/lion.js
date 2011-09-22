@@ -158,6 +158,9 @@ jj.createCreature('_lion', function (_lion) {
         jj.chat(creatureName+" got too close to the lion!", _lion);
         lastCreatureInteractedWith = creatureName;
         other.trigger("eat");        
+        if (!!other.eat) {
+          other.eat();
+        }
       }
     } else if (sense == "click") {
       jj.chat("Leave me alone, human!", _lion);

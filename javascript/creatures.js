@@ -29,7 +29,9 @@
                 "https://raw.github.com/gist/1206090/", // ufo @JimPurbrick
                 "https://raw.github.com/gist/1208781/", // angrybird @rakugojon
                 "creatures/lion/lion.js", 				// pete goodman - @thegingerbloke
-                "creatures/pavilion-crab/pavilion-crab.js"	// joseph steiner - 
+                "creatures/pavilion-crab/pavilion-crab.js",	// joseph steiner - 
+                "creatures/hippoBee/hippoBee.js",    //riccardo - marco 
+				"creatures/elephant/elephant.js"    //piotr rochala - @rochal
 				
 				// * PUT YOUR DEV CREATURE SCRIPT HERE *
 				// "creatures/mycreature.js"
