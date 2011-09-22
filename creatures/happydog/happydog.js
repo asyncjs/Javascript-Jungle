@@ -25,11 +25,13 @@ jj.createCreature('happydog', function (creature) {
             // creature.position({ left: -150})
             // left = 150;
             right_to_left = true;
+            creature.el.css('background', 'url(./creatures/happydog/media/happydog-reflect.svg)');
             left = left -10;
             creature.position({left:left-10});
         }
         else if (left < edge)
         {
+            creature.el.css('background', 'url(./creatures/happydog/media/happydog.svg)');
             right_to_left = false;
             left = left +10;
             creature.position({left:left+10});
