@@ -41,8 +41,7 @@
     return Tree;
   })();
   colours = ['#3D1E09', '#693510', '#914814', '#E0741B'];
-  for (distance = 12; distance >= 3; distance += -3) {
-    console.log(distance);
+  for (distance = 9; distance >= 3; distance += -3) {
     tcol = colours.shift();
     for (tree = 1; 1 <= distance ? tree <= distance : tree >= distance; 1 <= distance ? tree++ : tree--) {
       jj.createCreature("tree-" + distance + "-" + tree, function(layer) {

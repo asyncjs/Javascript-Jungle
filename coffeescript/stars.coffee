@@ -14,7 +14,10 @@ jj.createCreature 'stars', (layer) ->
   #work out where we are in day at initialisation and render
   jj.bind 'clock',  (h,m) ->
     if m % 10 == 0
-      max = 100 - Math.floor(h * 8.33)
+      #distance from zero
+      max = Math.floor(Math.abs(12-h) * 8.33)
+      max = 0 if max < 0
+      console.log [star_visible.length, max]
       remove = star_visible.length > max
       for i in [star_visible.length ... max ]
         if remove

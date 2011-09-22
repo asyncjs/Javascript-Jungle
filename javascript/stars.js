@@ -30,7 +30,11 @@
     return jj.bind('clock', function(h, m) {
       var i, max, remove, rgb, star, tar, _ref, _results, _results2;
       if (m % 10 === 0) {
-        max = 100 - Math.floor(h * 8.33);
+        max = Math.floor(Math.abs(12 - h) * 8.33);
+        if (max < 0) {
+          max = 0;
+        }
+        console.log([star_visible.length, max]);
         remove = star_visible.length > max;
         _results = [];
         for (i = _ref = star_visible.length; _ref <= max ? i < max : i > max; _ref <= max ? i++ : i--) {
