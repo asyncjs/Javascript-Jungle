@@ -152,7 +152,7 @@
 
         
         jj.bind('tick', function(hr,m) {
-          console.log(i);
+          //console.log(i);
           if (num == 0) {
             var t = (new Date().getTime());
             if (nextHideOrShow < t) {
