@@ -143,43 +143,49 @@
         boids.push(boid);
 
         layer.size({ width: '21', height: '30'});
-        
 
+        
         jj.bind('tick', function(hr,m) {
-          // Get pos from DOM so we play nice with the aliens
           var pos = layer.position();
           boid.pos = {x: pos.left*SCALE, y: pos.top*SCALE};
-          
-          boid.vel = vadd(boid.vel,rule1(boid),rule2(boid), rule3(boid), rule4b(boid));
+          if (boid.eaten) {
+            if ((new Date().getTime()) - boid.eaten > 10*1000) {
+              boid.eaten = null;
+            }
+            if (boid.pos.y/SCALE > jj.size().height) {
+              boid.vel = {x: 0, y: 0};
+            } else {
+              boid.vel = {x: boid.vel.x/1.1, y: boid.vel.y+(1/SCALE)};
+            }
+          } else {
+            // Get pos from DOM so we play nice with the aliens
+            boid.vel = vadd(boid.vel,rule1(boid),rule2(boid), rule3(boid), rule4b(boid));
+          }
           boid.pos = vadd(boid.pos, boid.vel);
           //boid.pos = vadd(boid.pos, vdiv(boid.vel,2));;
           //boid.pos.x = lim(boid.pos.x, 0, jj.size().width);
           //boid.pos.y = lim(boid.pos.y, 0, jj.size().height);
           //console.log(boid.vel.x, boid.vel.y);
           var newpos = vdiv(boid.pos,SCALE);
-          layer.position({left: newpos.x, top: newpos.y});
+          layer.position({left: newpos.x, top: newpos.y, zIndex: 100});
           //layer.position({left: lim(pos.x % jj.size().width, 0,jj.size().width) , top: lim(pos.y % jj.size().height, 0, jj.size().height)});
 
           if (num == 0) {
-            layer.el.css('background', 'url(/creatures/herm-boids/bar.png)');
+            layer.el.css('background', 'url(./creatures/herm-boids/bar.png)');
             layer.size({ width: '30', height: '25'});
             } else {
-          if (boid.vel.x > 0) {
-            layer.el.css('background', 'url(/creatures/herm-boids/boid-right.gif)');
-          } else {
-            layer.el.css('background', 'url(/creatures/herm-boids/boid-left.gif)');
-          }
+              if (boid.vel.x > 0) {
+                layer.el.css('background', 'url(./creatures/herm-boids/boid-right.gif)');
+              } else {
+                layer.el.css('background', 'url(./creatures/herm-boids/boid-left.gif)');
+              }
           }
 
-          if (boid.eaten && (new Date().getTime()) - boid.eaten > 10) {
-            layer.el.show();
-            boid.eaten = null;
-          }
         });
         layer.bind('eat', function () {
           boid.eaten = new Date().getTime();
-          layer.el.hide();
           jj.chat("Oh noes! I just got eaten :(", layer);
+          //boid.vel.y = -10/SCALE;
         });;
 
       });
