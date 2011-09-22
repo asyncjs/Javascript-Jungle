@@ -1,36 +1,54 @@
-  jj.createCreature('stars', function (layer) {
-
+(function() {
+  jj.createCreature('stars', function(layer) {
+    var $rnd, h, rp, star, star_positions, star_visible, w, ws;
     layer.data({
-        background: true
+      background: true
     });
-
-    // the div element for the layer.
-    var el = layer.el;
-    layer.size({ width: '100%', height: '30%'});
-    var w = layer.size().width, 
-        h = layer.size().height;
-    var rp = Raphael(el[0],w,h);
-    var stars = [];
-    jj.bind('clock', function(hr,m) {
-      if(m%10===0) {
-        if((hr>20)) {
-          stars.push(
-            rp.circle( 
-              Math.floor(Math.random()*w),
-              Math.floor(Math.random()*h),
-              hr>22 ? 1 : 2
-            ).attr({
-              stroke:'#fff',
-              fill: '#fff'
-            })
-          );
-        } else if(hr < 5) {
-          //remove stars
-          var nxt = stars.pop();
-          if(nxt) {
-            nxt.remove();
-          }
+    ws = jj.size();
+    w = ws.width;
+    h = 200;
+    layer.size({
+      width: w,
+      height: h
+    });
+    rp = Raphael(layer.el[0], ws.width, h);
+    $rnd = function(m) {
+      return Math.floor(Math.random() * m);
+    };
+    star_positions = (function() {
+      var _results;
+      _results = [];
+      for (star = 1; star <= 100; star++) {
+        _results.push([$rnd(w), $rnd(h), star > 50 ? 2 : 1]);
+      }
+      return _results;
+    })();
+    star_visible = [];
+    return jj.bind('clock', function(h, m) {
+      var i, max, remove, rgb, star, tar, _ref, _results, _results2;
+      if (m % 10 === 0) {
+        max = 100 - Math.floor(h * 8.33);
+        remove = star_visible.length > max;
+        _results = [];
+        for (i = _ref = star_visible.length; _ref <= max ? i < max : i > max; _ref <= max ? i++ : i--) {
+          _results.push(remove ? star_visible.pop().remove() : star_visible.push(rp.circle.apply(rp, star_positions[i]).attr({
+            stroke: '#fff',
+            fill: '#fff'
+          })));
         }
+        return _results;
+      } else if (star_visible.length) {
+        tar = $rnd(155) + 100;
+        rgb = "rgb(" + tar + "," + tar + "," + tar + ")";
+        _results2 = [];
+        for (star = 1; star <= 10; star++) {
+          _results2.push(star_visible[$rnd(star_visible.length)].attr({
+            fill: rgb,
+            stroke: rgb
+          }));
+        }
+        return _results2;
       }
     });
   });
+}).call(this);

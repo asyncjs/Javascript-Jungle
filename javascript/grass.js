@@ -8,6 +8,8 @@ jj.createCreature('grass', function (layer) {
   var el = layer.el;
   var jq = jj.jQuery;
   // Set the size of your layer.
+  //set to bottom of window
+  
   layer.size({ width: '100%', height: '100%'});
   var w = layer.size().width, 
       h = layer.size().height;
