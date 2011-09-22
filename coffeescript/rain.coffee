@@ -19,7 +19,7 @@ jj.createCreature 'rain', (layer) ->
     context = []
     for ly in [0 .. 2]
       canvas = document.createElement 'canvas'
-      canvas.className = "rain"
+      canvas.className = "full"
       canvas.width = ws.width
       canvas.height = ws.height
       layer.el.append canvas
@@ -27,9 +27,10 @@ jj.createCreature 'rain', (layer) ->
     #fuck this is awful, sorry will refactor when i get chance
 
     jj.bind 'clock',  (h,m) ->
-      context[2].drawImage droplet[1+$rnd(2)], $rnd(ws.width),$rnd(ws.height), 30, 30 if raining
+      context[2].drawImage droplet[1+$rnd(2)], $rnd(ws.width),$rnd(ws.height), 30, 30 if raining && $rnd(5)==1
 
     jj.chat "And the heavens open...", layer
+    jj.trigger 'rain:start', layer
     raining = 1
     #do a rainstorm, single droplets hit screen, background has lines of blue
     $rl = (cx,skew,sh,cl)->
@@ -52,7 +53,7 @@ jj.createCreature 'rain', (layer) ->
     $rl context[0], 50, 0, '#1B59E0'
     $rl context[1], 70, 5, '#163882'
     _.delay(
-      -> raining = 0;jj.chat "Deluge over", layer; jj.jQuery(cx.canvas).remove() for cx in context
+      -> raining = 0;jj.chat "Deluge over", layer; jj.trigger 'rain:stop',layer;jj.jQuery(cx.canvas).remove() for cx in context
       15000
     ) 
     
