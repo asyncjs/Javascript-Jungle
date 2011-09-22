@@ -5,6 +5,7 @@ jj.createCreature 'stars', (layer) ->
   h = 200
   layer.size width: w, height: h
   #pre initalise with the stars locations
+  layer.position zIndex: -998
   rp = Raphael(layer.el[0],ws.width,h);
   
   $rnd = (m)-> Math.floor Math.random() * m

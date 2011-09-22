@@ -11,6 +11,9 @@
       width: w,
       height: h
     });
+    layer.position({
+      zIndex: -998
+    });
     rp = Raphael(layer.el[0], ws.width, h);
     $rnd = function(m) {
       return Math.floor(Math.random() * m);

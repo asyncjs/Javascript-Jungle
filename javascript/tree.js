@@ -44,6 +44,9 @@
       width: '100%',
       height: '100%'
     });
+    layer.position({
+      zIndex: -910
+    });
     canvas = document.createElement('canvas');
     layer.el.append(canvas);
     canvas.width = layer.size().width;
