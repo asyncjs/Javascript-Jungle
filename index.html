@@ -15,7 +15,7 @@
 	<script src="javascript/lib/getscript.js"></script>
 	<script>
 	    getScript(
-	        // Libraries
+	        // Libraries, independent of each another
 	        [
 	            "lib/jquery.js",
 	            "lib/raphael.min.js",
@@ -23,14 +23,19 @@
 	            "lib/broadcast.js"
 	        ],
 	        
-	        // Core scripts
+	        // Core Jungle script
 	        "jungle.js?v3",
+	        
+	        // Sensing other creatures
 	        "awareness.js?v3",
 	        
 	        // Creatures are added to creatures.js
-	        "creatures.js?v4",
+	        "creatures.js?v6",
 	        
-	        // Load options (include `noCache:true` to prevent caching, while debugging)
+	        // Optional callback function to execute when all files completely loaded
+	        // function(){},
+	        
+	        // Load options (can include `noCache:true` to prevent browser caching, while debugging)
     	    {path:"javascript/"}
 	    );
 	</script>
