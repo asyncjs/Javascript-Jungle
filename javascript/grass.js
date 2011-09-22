@@ -3,7 +3,7 @@ jj.createCreature('grass', function (layer) {
     layer.data({
         background: true
     });
-    layer.position({zIndex: -900});
+    layer.position({zIndex: 1});
 
   // the div element for the layer.
   var el = layer.el;

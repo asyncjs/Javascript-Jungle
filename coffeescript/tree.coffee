@@ -1,5 +1,5 @@
 class Tree
-  constructor: (canvas, @x,@y) ->
+  constructor: (canvas, @x,@y,@branch_length,@color) ->
     @context = canvas.getContext '2d'
     @context.strokeStyle = @color
     @_makeBranch @x, @y, @branch_length, -Math.PI/2, @max_size
@@ -7,7 +7,7 @@ class Tree
   y: 400
   max_sub_branch: 5
   max_sub_angle: 3*Math.PI/4
-  max_size: 7
+  max_size: 6
   branch_length: 110
   color: "#553111"
   _makeBranch: (start_x, start_y, length, angle, size) ->
@@ -29,15 +29,23 @@ class Tree
         newSize = size - 1
         @_makeBranch end_x, end_y, newLength, newAngle, newSize
       @context.closePath();
+      #draw leaves here. change colour with season.
 
-jj.createCreature 'trees', (layer) ->
-  layer.size width: '100%', height: '100%'
-  layer.data background: true
-  layer.position zIndex: -910
-  canvas = document.createElement 'canvas'
-  layer.el.append canvas
-  canvas.width  = layer.size().width
-  canvas.height = layer.size().height
-  new Tree canvas, 100, canvas.height
-  new Tree canvas, canvas.width - 100, canvas.height
-  new Tree canvas, canvas.width / 2, canvas.height
+colours = ['#3D1E09','#693510','#914814','#E0741B']
+for distance in [12 .. 3] by -3
+  console.log distance
+  tcol = colours.shift()
+  for tree in [1 .. distance]
+    jj.createCreature "tree-#{distance}-#{tree}", (layer) ->
+      layer.data background: true
+      ws = jj.size()
+      [w,h] = [Math.floor(ws.width / distance), Math.floor(ws.height / (distance/3))]
+      layer.size width: w+200, height: h
+      layer.position bottom: 0, left: w*(tree-1), zIndex: -910-distance
+      
+      #the further back the smaller and darker the tree.
+      canvas = document.createElement 'canvas'
+      canvas.width = w+200
+      canvas.height = h
+      layer.el.append canvas
+      new Tree canvas, w/2, h-((distance-3)*10),Math.floor((h-100)/6),tcol

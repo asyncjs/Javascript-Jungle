@@ -46,6 +46,17 @@ div#jungle {
   z-index: -999;
 }
 
+div.floor {
+  position: fixed;
+  bottom : 0;
+  left : 0;
+  height : 25%;
+  width : 100%;
+  z-index: -998;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(28, 12, 2, 0)), to(#a45607));
+  background-image: -moz-linear-gradient(270deg, rgba(28, 12, 2, 0) 0%, #a45607 100%);
+}
+
 div.creature {
   position: absolute;
 }

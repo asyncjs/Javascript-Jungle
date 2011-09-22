@@ -1,9 +1,11 @@
 (function() {
-  var Tree;
+  var Tree, colours, distance, tcol, tree;
   Tree = (function() {
-    function Tree(canvas, x, y) {
+    function Tree(canvas, x, y, branch_length, color) {
       this.x = x;
       this.y = y;
+      this.branch_length = branch_length;
+      this.color = color;
       this.context = canvas.getContext('2d');
       this.context.strokeStyle = this.color;
       this._makeBranch(this.x, this.y, this.branch_length, -Math.PI / 2, this.max_size);
@@ -12,7 +14,7 @@
     Tree.prototype.y = 400;
     Tree.prototype.max_sub_branch = 5;
     Tree.prototype.max_sub_angle = 3 * Math.PI / 4;
-    Tree.prototype.max_size = 7;
+    Tree.prototype.max_size = 6;
     Tree.prototype.branch_length = 110;
     Tree.prototype.color = "#553111";
     Tree.prototype._makeBranch = function(start_x, start_y, length, angle, size) {
@@ -38,24 +40,33 @@
     };
     return Tree;
   })();
-  jj.createCreature('trees', function(layer) {
-    var canvas;
-    layer.size({
-      width: '100%',
-      height: '100%'
-    });
-    layer.data({
-      background: true
-    });
-    layer.position({
-      zIndex: -910
-    });
-    canvas = document.createElement('canvas');
-    layer.el.append(canvas);
-    canvas.width = layer.size().width;
-    canvas.height = layer.size().height;
-    new Tree(canvas, 100, canvas.height);
-    new Tree(canvas, canvas.width - 100, canvas.height);
-    return new Tree(canvas, canvas.width / 2, canvas.height);
-  });
+  colours = ['#3D1E09', '#693510', '#914814', '#E0741B'];
+  for (distance = 12; distance >= 3; distance += -3) {
+    console.log(distance);
+    tcol = colours.shift();
+    for (tree = 1; 1 <= distance ? tree <= distance : tree >= distance; 1 <= distance ? tree++ : tree--) {
+      jj.createCreature("tree-" + distance + "-" + tree, function(layer) {
+        var canvas, h, w, ws, _ref;
+        layer.data({
+          background: true
+        });
+        ws = jj.size();
+        _ref = [Math.floor(ws.width / distance), Math.floor(ws.height / (distance / 3))], w = _ref[0], h = _ref[1];
+        layer.size({
+          width: w + 200,
+          height: h
+        });
+        layer.position({
+          bottom: 0,
+          left: w * (tree - 1),
+          zIndex: -910 - distance
+        });
+        canvas = document.createElement('canvas');
+        canvas.width = w + 200;
+        canvas.height = h;
+        layer.el.append(canvas);
+        return new Tree(canvas, w / 2, h - ((distance - 3) * 10), Math.floor((h - 100) / 6), tcol);
+      });
+    }
+  }
 }).call(this);

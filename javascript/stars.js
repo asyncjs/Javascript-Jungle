@@ -22,7 +22,7 @@
       var _results;
       _results = [];
       for (star = 1; star <= 100; star++) {
-        _results.push([$rnd(w), $rnd(h), star > 50 ? 2 : 1]);
+        _results.push([$rnd(w), $rnd(h - 3), star > 50 ? 2 : 1]);
       }
       return _results;
     })();

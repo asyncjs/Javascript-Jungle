@@ -9,7 +9,7 @@ jj.createCreature 'stars', (layer) ->
   rp = Raphael(layer.el[0],ws.width,h);
   
   $rnd = (m)-> Math.floor Math.random() * m
-  star_positions = ( [$rnd(w), $rnd(h),if star>50 then 2 else 1] for star in [1..100] )
+  star_positions = ( [$rnd(w), $rnd(h-3),if star>50 then 2 else 1] for star in [1..100] )
   star_visible = []
   #work out where we are in day at initialisation and render
   jj.bind 'clock',  (h,m) ->
