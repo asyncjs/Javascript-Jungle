@@ -21,6 +21,11 @@
       droplet[id] = new Image();
       droplet[id].src = "images/droplet" + id + ".png";
     }
+    jj.bind('clock', function(h, m) {
+      if (!raining && h === $rnd(12)) {
+        return jj.trigger('rain');
+      }
+    });
     return jj.bind('rain', function(weight) {
       var $rl, canvas, context, ly;
       context = [];
