@@ -32,6 +32,7 @@ class Tree
 
 jj.createCreature 'trees', (layer) ->
   layer.size width: '100%', height: '100%'
+  layer.data background: true
   layer.position zIndex: -910
   canvas = document.createElement 'canvas'
   layer.el.append canvas
