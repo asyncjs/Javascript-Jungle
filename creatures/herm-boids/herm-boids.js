@@ -161,14 +161,24 @@
           //layer.position({left: lim(pos.x % jj.size().width, 0,jj.size().width) , top: lim(pos.y % jj.size().height, 0, jj.size().height)});
 
           if (num == 0) {
-            layer.el.css('background', 'url(/creatures/herm-boids/bar.png)');
+            layer.el.css('background', 'url(./creatures/herm-boids/bar.png)');
             layer.size({ width: '30', height: '25'});
             } else {
-          if (boid.vel.x > 0) {
-            layer.el.css('background', 'url(/creatures/herm-boids/boid-right.gif)');
-          } else {
-            layer.el.css('background', 'url(/creatures/herm-boids/boid-left.gif)');
-          }
+              layer.el.css('background', 'url(./creatures/herm-boids/boids-sprite-small.png)');
+              layer.size({ width: '20', height: '30'});
+            if (boid.vel.x > 0) {
+              if (hr % 2 == 0) {
+                layer.el.css('backgroundPosition', "-80px 0"); //face right
+              } else {
+                layer.el.css('backgroundPosition', "-120px 0"); //face right
+              }
+            } else {
+              if (hr % 2 == 0) {
+                layer.el.css('backgroundPosition', "0 0"); //face left
+              } else {
+                layer.el.css('backgroundPosition', "-40px 0"); //face left
+              }
+            }
           }
 
           if (boid.eaten && (new Date().getTime()) - boid.eaten > 10) {
@@ -180,6 +190,11 @@
           boid.eaten = new Date().getTime();
           layer.el.hide();
           jj.chat("Oh noes! I just got eaten :(", layer);
+          if (boid.vel.x > 0) {
+            layer.el.css('backgroundPosition', "-160px 0"); //face right
+          } else {
+            layer.el.css('backgroundPosition', "-200px 0"); //face right
+          }
         });;
 
       });
