@@ -143,7 +143,6 @@
         boids.push(boid);
 
         layer.size({ width: '21', height: '30'});
-        layer.el.css('background', 'url(http://almostobsolete.net/boid-left.gif)');
         
 
         jj.bind('tick', function(hr,m) {
@@ -162,13 +161,13 @@
           //layer.position({left: lim(pos.x % jj.size().width, 0,jj.size().width) , top: lim(pos.y % jj.size().height, 0, jj.size().height)});
 
           if (num == 0) {
-            layer.el.css('background', 'url(http://almostobsolete.net/bar.png)');
+            layer.el.css('background', 'url(/creatures/herm-boids/bar.png)');
             layer.size({ width: '30', height: '25'});
             } else {
           if (boid.vel.x > 0) {
-            layer.el.css('background', 'url(http://almostobsolete.net/boid-right.gif)');
+            layer.el.css('background', 'url(/creatures/herm-boids/boid-right.gif)');
           } else {
-            layer.el.css('background', 'url(http://almostobsolete.net/boid-left.gif)');
+            layer.el.css('background', 'url(/creatures/herm-boids/boid-left.gif)');
           }
           }
 
