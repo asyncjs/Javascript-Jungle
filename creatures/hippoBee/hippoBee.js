@@ -38,7 +38,7 @@ jj.createCreature('hippoBee', function (creature) {
     creature.el.prepend(canvas);
     
     //Path to image folder
-    var path = "media/";
+    var path = "creatures/hippoBee/media/";
     //Create the hippobee image
     var hipoBeeImg = new Image();
     hipoBeeImg.src = path+"HippoBee1.png";
@@ -96,10 +96,6 @@ jj.createCreature('hippoBee', function (creature) {
     }
 
     setInterval(animateWings, 100);
-    
-    creature.bind('see', function(other) {
-      console.log(creature.name() + ' saw ' + other.name());
-    });
   
 });
 
