@@ -31,7 +31,7 @@
                 "creatures/lion/lion.js",               // pete goodman - @thegingerbloke
                 "creatures/pavilion-crab/pavilion-crab.js", // joseph steiner - 
                 "creatures/hippoBee/hippoBee.js",       // riccardo - marco 
-                "creatures/elephant/elephant.js"        // piotr rochala - @rochal
+                "creatures/elephant/elephant.js",        // piotr rochala - @rochal
                 "creatures/buzzy-fly/buzzy-fly.js"      // Fly - Spike & Shanee
                 
                 // * PUT YOUR DEV CREATURE SCRIPT HERE *
