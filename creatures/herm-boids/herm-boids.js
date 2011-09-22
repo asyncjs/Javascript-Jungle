@@ -108,10 +108,16 @@
   function rule4b (boid) {
     // RULE4b: Fly towards the center of screen
     var center = {x: (jj.size().width*SCALE)/2, y: (jj.size().height*SCALE)/2};
+    if (!showYourSelfs) {
+      center.x = center.x * 3;
+      center.t = center.y * 3;
+    }
     return vdiv(vadd(center, vneg(boid.pos)), RULE4b_SCALE);
   }
 
 
+  var showYourSelfs = true;
+  var nextHideOrShow = (new Date().getTime())+1000*5;;
   
   for (var i = 0; i < HOW_MANY; i++) {
     (function () {
@@ -146,6 +152,22 @@
 
         
         jj.bind('tick', function(hr,m) {
+          console.log(i);
+          if (num == 0) {
+            var t = (new Date().getTime());
+            if (nextHideOrShow < t) {
+              nextHideOrShow = t+Math.random()*1000*60;
+              if (showYourSelfs) {
+                jj.chat("We're off!", layer);
+                showYourSelfs = false;
+              } else {
+                jj.chat("Remember us!", layer);
+                showYourSelfs = true;
+              }
+            }
+          }
+          
+          
           var pos = layer.position();
           boid.pos = {x: pos.left*SCALE, y: pos.top*SCALE};
           if (boid.eaten) {
