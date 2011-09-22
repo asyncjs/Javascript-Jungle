@@ -62,6 +62,7 @@ jj.createCreature('grass', function (layer) {
   layer.length = function () {
     return curGrowth;
   };
+  
   jj.bind('grow',function() {
     if(curGrowth > h) {
       //game over man, game over.
@@ -77,6 +78,7 @@ jj.createCreature('grass', function (layer) {
     }
     
   });
+  
   layer.eat = function () {
     if(curGrowth>20) {
       //find intersection of the caller
