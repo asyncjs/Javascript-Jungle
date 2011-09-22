@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="296px" height="225px" viewBox="0 0 296 225" enable-background="new 0 0 296 225" xml:space="preserve">
+<path fill="#3D1CD7" d="M226.9,136.243c0-13.521-11.102-24.482-24.797-24.482H93.952c-13.693,0-24.796,10.962-24.796,24.482v19.894
+	c0,13.521,11.102,24.481,24.796,24.481h108.151c13.694,0,24.797-10.962,24.797-24.481V136.243z"/>
+<path fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" d="M226.9,136.243
+	c0-13.521-11.102-24.482-24.797-24.482H93.952c-13.693,0-24.796,10.962-24.796,24.482v19.894c0,13.521,11.102,24.481,24.796,24.481
+	h108.151c13.694,0,24.797-10.962,24.797-24.481V136.243z"/>
+<polygon fill="#3D1CD7" stroke="#000000" points="54.428,56.195 6.657,82.905 24.904,126.124 83.952,126.124 102.198,82.905 "/>
+<polygon fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" points="54.428,56.195 6.657,82.905 24.904,126.124 
+	83.952,126.124 102.198,82.905 "/>
+<ellipse fill="#FF89D7" stroke="#000000" cx="14.055" cy="45.083" rx="10.751" ry="11.113"/>
+<ellipse fill="#3D1CD7" stroke="#000000" stroke-width="5" stroke-miterlimit="10" cx="14.055" cy="45.083" rx="10.751" ry="11.113"/>
+<path fill="#FF89D7" stroke="#000000" d="M20.556,51.35c15.315,15.222,12.209,16.957,12.209,16.957"/>
+<path fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" d="M20.556,51.35
+	c15.315,15.222,12.209,16.957,12.209,16.957"/>
+<rect x="188.06" y="180.618" fill="#3D1CD7" stroke="#000000" width="20.944" height="41.356"/>
+<rect x="188.06" y="180.618" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" width="20.944" height="41.356"/>
+<rect x="98.586" y="180.618" fill="#3D1CD7" stroke="#000000" width="20.945" height="41.356"/>
+<rect x="98.586" y="180.618" fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" width="20.945" height="41.356"/>
+<path fill="#3D1CD7" stroke="#000000" d="M219.225,117.27c5.873-8.77,23.094-37.312,19.29-49.045
+	c-1.381-4.258-17.683-2.899-14.157-11.591c0.825-2.036,18.499-0.478,21.273-1.025c14.074-2.776,35.339-17.114,43.505-28.633
+	c27.229-38.41-47.741-19.094-1.382-19.094"/>
+<path fill="none" stroke="#000000" stroke-width="5" stroke-miterlimit="10" d="M219.225,117.27
+	c5.873-8.77,23.094-37.312,19.29-49.045c-1.381-4.258-17.683-2.899-14.157-11.591c0.825-2.036,18.499-0.478,21.273-1.025
+	c14.074-2.776,35.339-17.114,43.505-28.633c27.229-38.41-47.741-19.094-1.382-19.094"/>
+<g>
+	<g>
+		<defs>
+			<rect id="SVGID_1_" x="76.4" y="131.725" width="167.903" height="37.493"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_2_)">
+			<text transform="matrix(0.9979 0 0 1 93.0581 150.4707)" fill="#00FCFF" font-family="'Helvetica'" font-size="18.6068">Unhappy Dog</text>
+		</g>
+	</g>
+</g>
+</svg>

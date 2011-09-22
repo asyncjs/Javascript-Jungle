@@ -7,7 +7,9 @@ jj.createCreature('happydog', function (creature) {
         floor = world.height-dog_height
         top = floor,
         left = 50,
-        edge = 50
+        edge = -500,
+        right_to_left = false,
+        rain_flag = false
     
     creature.size({ width: dog_width, height: dog_height});
         // canvas = document.createElement('canvas'),
@@ -19,19 +21,32 @@ jj.createCreature('happydog', function (creature) {
     // el.append(canvas)
     // el.append("<img id=\"happyimg\" src=\"creatures/happydog/media/happydog.svg\">");
     creature.position({top: top, left: left});
-    right_to_left = false;
     jj.bind('tick', function () {
         if (left > (world.width-(edge+dog_width))) {
             // creature.position({ left: -150})
             // left = 150;
             right_to_left = true;
-            creature.el.css('background', 'url(./creatures/happydog/media/happydog-reflect.svg)');
+            if (rain_flag)
+            {
+                creature.el.css('background', 'url(./creatures/happydog/media/unhappydog-reflect.svg)');                
+            }
+            else
+            {
+                creature.el.css('background', 'url(./creatures/happydog/media/happydog-reflect.svg)');
+            }
             left = left -10;
             creature.position({left:left-10});
         }
         else if (left < edge)
         {
-            creature.el.css('background', 'url(./creatures/happydog/media/happydog.svg)');
+            if (rain_flag)
+            {
+                creature.el.css('background', 'url(./creatures/happydog/media/unhappydog.svg)');                
+            }
+            else
+            {
+                creature.el.css('background', 'url(./creatures/happydog/media/happydog.svg)');
+            }
             right_to_left = false;
             left = left +10;
             creature.position({left:left+10});
@@ -60,6 +75,30 @@ jj.createCreature('happydog', function (creature) {
             creature.position({top: floor-bouncy});
         }
      });
+    jj.bind('rain:start', function() {
+       creature.chat("Nooo rain!!!"); 
+       if(right_to_left)
+       {
+           creature.el.css('background', 'url(./creatures/happydog/media/unhappydog-reflect.svg)');
+       }
+       else
+       {
+           creature.el.css('background', 'url(./creatures/happydog/media/unhappydog.svg)');
+       }
+       rain_flag = true;
+    });
+    jj.bind('rain:stop', function() {
+       creature.chat("Rain stopped, woop!"); 
+       if(right_to_left)
+       {
+           creature.el.css('background', 'url(./creatures/happydog/media/happydog-reflect.svg)');
+       }
+       else
+       {
+           creature.el.css('background', 'url(./creatures/happydog/media/happydog.svg)');
+       }
+       rain_flag = false;
+    });
     
 
 });
