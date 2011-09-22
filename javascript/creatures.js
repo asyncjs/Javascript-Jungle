@@ -23,7 +23,7 @@
                 "https://raw.github.com/gist/1204505/", // sun
                 "https://raw.github.com/gist/1204620/", // butterfly_colmjude.js
                 "https://raw.github.com/gist/1204683/", // happygiraffe-snowman
-                "https://raw.github.com/gist/1204698/", // happydog
+                "./creatures/happydog/happydog.js", // happydog
                 "./creatures/herm-boids/herm-boids.js", // @almostobsolete - flocking birds (herm-boid)
                 "https://raw.github.com/gist/1204932/", // toucan @rakugojon
                 "https://raw.github.com/gist/1206090/", // ufo @JimPurbrick
