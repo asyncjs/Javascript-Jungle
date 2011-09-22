@@ -33,13 +33,13 @@ jj.createCreature('grass', function (layer) {
   //double layer it
 
   var rp = Raphael(el[0],w,h);
-  var rp2 = Raphael(el[0],w,h);
+  //var rp2 = Raphael(el[0],w,h);
   var grass = rp.path(gen_path(curGrowth)).attr({
     stroke: '100-#0f5b0f-#37cf37',
     fill: '100-#0f5b0f-#37cf37'
   });
 
-  var grass2 = rp2.path(gen_path(curGrowth-60,10)).attr({
+  var grass2 = rp.path(gen_path(curGrowth-60,10)).attr({
     stroke: '100-#10360C-#15610F',
     fill: '100-#10360C-#15610F'
   });
