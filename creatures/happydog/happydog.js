@@ -2,8 +2,9 @@ jj.createCreature('happydog', function (creature) {
     var el = creature.el,
         world   = jj.size(),
         bouncy = 0;
+        floor = world.height-200
     el.append("<img id=\"happyimg\" src=\"creatures/happydog/media/happydog.svg\">");
-    creature.position({top: "450px", left: "50px"});
+    creature.position({top: floor, left: "50px"});
     jj.bind('tick', function () {
         if (creature.position().left > world.width) {
             creature.position({ left: '-150px'})
@@ -14,13 +15,13 @@ jj.createCreature('happydog', function (creature) {
         }
         if (bouncy > 50)
         {
-            creature.position({ top: "450px"})
+            creature.position({ top: floor})
             bouncy = 0;
         }
         else
         {
             bouncy += 4;
-            creature.position({top: 450-bouncy});
+            creature.position({top: floor-bouncy});
         }
      });
     
