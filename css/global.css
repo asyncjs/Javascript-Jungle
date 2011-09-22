@@ -57,7 +57,11 @@ div.floor {
   background-image: -moz-linear-gradient(270deg, rgba(28, 12, 2, 0) 0%, #a45607 100%);
 }
 
-canvas.rain {
+.front {
+  z-index: 9999;
+}
+
+canvas.full {
   position: fixed;
   top: 0;
   left: 0;
