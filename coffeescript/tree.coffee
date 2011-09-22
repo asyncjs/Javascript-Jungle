@@ -32,7 +32,7 @@ class Tree
       #draw leaves here. change colour with season.
 
 colours = ['#3D1E09','#693510','#914814','#E0741B']
-for distance in [9 .. 3] by -3
+for distance in [6 .. 3] by -3
   tcol = colours.shift()
   for tree in [1 .. distance]
     jj.createCreature "tree-#{distance}-#{tree}", (layer) ->

@@ -160,6 +160,23 @@
           } else {
             // Get pos from DOM so we play nice with the aliens
             boid.vel = vadd(boid.vel,rule1(boid),rule2(boid), rule3(boid), rule4b(boid));
+
+            layer.el.css('background', 'url(./creatures/herm-boids/boids-sprite-small.png)');
+            layer.size({ width: '20', height: '30'});
+            if (boid.vel.x > 0) {
+              if (hr % 2 == 0) {
+                layer.el.css('backgroundPosition', "-80px 0"); //face right
+              } else {
+                layer.el.css('backgroundPosition', "-120px 0"); //face right
+              }
+            } else {
+              if (hr % 2 == 0) {
+                layer.el.css('backgroundPosition', "0 0"); //face left
+              } else {
+                layer.el.css('backgroundPosition', "-40px 0"); //face left
+              }
+            }
+         
           }
           boid.pos = vadd(boid.pos, boid.vel);
           //boid.pos = vadd(boid.pos, vdiv(boid.vel,2));;
@@ -170,22 +187,15 @@
           layer.position({left: newpos.x, top: newpos.y, zIndex: 100});
           //layer.position({left: lim(pos.x % jj.size().width, 0,jj.size().width) , top: lim(pos.y % jj.size().height, 0, jj.size().height)});
 
-          if (num == 0) {
-            layer.el.css('background', 'url(./creatures/herm-boids/bar.png)');
-            layer.size({ width: '30', height: '25'});
-            } else {
-              if (boid.vel.x > 0) {
-                layer.el.css('background', 'url(./creatures/herm-boids/boid-right.gif)');
-              } else {
-                layer.el.css('background', 'url(./creatures/herm-boids/boid-left.gif)');
-              }
-          }
-
         });
         layer.bind('eat', function () {
           boid.eaten = new Date().getTime();
           jj.chat("Oh noes! I just got eaten :(", layer);
-          //boid.vel.y = -10/SCALE;
+          if (boid.vel.x > 0) {
+            layer.el.css('backgroundPosition', "-160px 0"); //face right
+          } else {
+            layer.el.css('backgroundPosition', "-200px 0"); //face right
+          }
         });;
 
       });

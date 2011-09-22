@@ -1,6 +1,6 @@
 (function() {
   jj.createCreature('rain', function(layer) {
-    var $rnd, canvas, context, ly, ws;
+    var $rnd, droplet, id, raining, ws;
     layer.data({
       background: true
     });
@@ -12,22 +12,38 @@
       width: ws.width,
       height: ws.height
     });
-    context = [];
-    for (ly = 0; ly <= 1; ly++) {
-      canvas = document.createElement('canvas');
-      canvas.className = "rain";
-      canvas.width = ws.width;
-      canvas.height = ws.height;
-      layer.el.append(canvas);
-      context[ly] = canvas.getContext('2d');
-    }
+    raining = 0;
     $rnd = function(m) {
       return Math.floor(Math.random() * m);
     };
-    console.log(context);
+    droplet = [];
+    for (id = 1; id <= 2; id++) {
+      droplet[id] = new Image();
+      droplet[id].src = "images/droplet" + id + ".png";
+    }
+    jj.bind('clock', function(h, m) {
+      if (!raining && h === $rnd(12) && m === 0) {
+        return jj.trigger('rain');
+      }
+    });
     return jj.bind('rain', function(weight) {
-      var $rl;
+      var $rl, canvas, context, ly;
+      context = [];
+      for (ly = 0; ly <= 2; ly++) {
+        canvas = document.createElement('canvas');
+        canvas.className = "rain";
+        canvas.width = ws.width;
+        canvas.height = ws.height;
+        layer.el.append(canvas);
+        context[ly] = canvas.getContext('2d');
+      }
+      jj.bind('clock', function(h, m) {
+        if (raining) {
+          return context[2].drawImage(droplet[1 + $rnd(2)], $rnd(ws.width), $rnd(ws.height), 30, 30);
+        }
+      });
       jj.chat("And the heavens open...", layer);
+      raining = 1;
       $rl = function(cx, skew, sh, cl) {
         var $anim, x, _ref;
         cx.strokeStyle = cl;
@@ -52,7 +68,18 @@
         return $anim(sh);
       };
       $rl(context[0], 50, 0, '#1B59E0');
-      return $rl(context[1], 70, 5, '#163882');
+      $rl(context[1], 70, 5, '#163882');
+      return _.delay(function() {
+        var cx, _i, _len, _results;
+        raining = 0;
+        jj.chat("Deluge over", layer);
+        _results = [];
+        for (_i = 0, _len = context.length; _i < _len; _i++) {
+          cx = context[_i];
+          _results.push(jj.jQuery(cx.canvas).remove());
+        }
+        return _results;
+      }, 15000);
     });
   });
 }).call(this);

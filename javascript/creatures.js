@@ -28,10 +28,11 @@
                 "https://raw.github.com/gist/1204932/", // toucan @rakugojon
                 "https://raw.github.com/gist/1206090/", // ufo @JimPurbrick
                 "https://raw.github.com/gist/1208781/", // angrybird @rakugojon
-                //"creatures/_lion/_lion.js", 				// pete goodman - @thegingerbloke
-                //"creatures/pavilion-crab/pavilion-crab.js"	// joseph steiner - 
-				"https://raw.github.com/gist/1218733/", // _lion
-				"https://raw.github.com/gist/0162a62a2c61f5fd74f4/" // pavilion crab
+                "creatures/lion/lion.js", 				// pete goodman - @thegingerbloke
+                "creatures/pavilion-crab/pavilion-crab.js"	// joseph steiner - 
+				
+				// * PUT YOUR DEV CREATURE SCRIPT HERE *
+				// "creatures/mycreature.js"
               );
             }
         },
