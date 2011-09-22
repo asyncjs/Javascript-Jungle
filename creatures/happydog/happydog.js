@@ -3,7 +3,18 @@ jj.createCreature('happydog', function (creature) {
         world   = jj.size(),
         bouncy = 0;
         floor = world.height-200
-    el.append("<img id=\"happyimg\" src=\"creatures/happydog/media/happydog.svg\">");
+        dog_height = 225,
+        dog_width = 296
+    
+    creature.size({ width: dog_width, height: dog_height});
+        // canvas = document.createElement('canvas'),
+        // context = canvas.getContext('2d'),
+        // width   = canvas.width  = 296,
+        // height  = canvas.height = 225,
+        // floor = world.height-height
+    creature.el.css('background', 'url(./creatures/happydog/media/happydog.svg)');
+    // el.append(canvas)
+    // el.append("<img id=\"happyimg\" src=\"creatures/happydog/media/happydog.svg\">");
     creature.position({top: floor, left: "50px"});
     jj.bind('tick', function () {
         if (creature.position().left > world.width) {
