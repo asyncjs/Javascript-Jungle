@@ -1,6 +1,7 @@
 // Boids
 // Thomas Parslow
 // tom@almostobsolete.net
+// @almostobsolete
 // 
 // Adapted from: http://www.kfish.org/boids/pseudocode.html
 (function() {
