@@ -4,7 +4,8 @@
 	var pos = { left: 50, bottom:0 };
 	var direction = 1;
 	var speed = 10;
-	
+	var isEyeOn = true;
+	var isMoving = true;
 
 	//set size
 	creature.size({width: 286, height: 236});
@@ -30,11 +31,9 @@
 	//need to wait for image to load
 	img.onload = function()
 	{
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.drawImage(img, 0, 0);	
+		draw();
 	}
-	
-	
+
 	jj.chat("Hello everyone!", creature);
 
 	// the div element for the creature.
@@ -61,29 +60,64 @@
 		});
 	}
 	
+	var draw = function()
+	{
+		//draw main shape
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(img, 0, 0);	
+		
+		if (isEyeOn)
+		{				
+			//draw the eye
+			ctx.fillStyle = "#000";
+			ctx.beginPath();
+			ctx.arc(199,67,3,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+	}
+	
 	jj.bind('tick', function() {
 		
-		var farRight = world.width / 2;
-		var farLeft = 50; 
-		
-		if (pos.left >= farRight)
+		if (isMoving)
 		{
-			direction = -1;
-			flip(-1);
-		}
-		
-		if (pos.left <= farLeft)
-		{
-			direction = 1;
-			flip(1);
-			jj.chat("Weeeeeeeee!", creature);
-		}
+			var farRight = world.width / 2;
+			var farLeft = 0; 
+			
+			if (pos.left >= farRight)
+			{
+				direction = -1;
+				flip(-1);
+			}
+			
+			if (pos.left <= farLeft)
+			{
+				direction = 1;
+				flip(1);
+				jj.chat("Weeeeeeeee!", creature);
+			}
 
-		pos.left += direction * speed;
-		creature.position({left: pos.left });
+			pos.left += direction * speed;
+			creature.position({left: pos.left, bottom:0 });
+		}
+		
 	});
 
 	jj.bind('clock', function(hh, mm) {
+		
+		if (pos.left <= 20)
+		{
+			isMoving = false;
+		}
+		
+		if (mm % 8 == 0)
+		{
+			isMoving = false;
+		}
+		if (mm % 13 == 0)
+		{
+			isMoving = true;
+		}
 		
 	});
 });
