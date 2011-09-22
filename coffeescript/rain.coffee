@@ -13,7 +13,7 @@ jj.createCreature 'rain', (layer) ->
     droplet[id].src = "images/droplet#{id}.png"
 
   jj.bind 'clock',  (h,m) ->
-    jj.trigger 'rain' if !raining && h == $rnd(12)
+    jj.trigger 'rain' if !raining && h == $rnd(12) && m == 0
 
   jj.bind 'rain', (weight) ->
     context = []

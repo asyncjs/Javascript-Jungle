@@ -22,7 +22,7 @@
       droplet[id].src = "images/droplet" + id + ".png";
     }
     jj.bind('clock', function(h, m) {
-      if (!raining && h === $rnd(12)) {
+      if (!raining && h === $rnd(12) && m === 0) {
         return jj.trigger('rain');
       }
     });
