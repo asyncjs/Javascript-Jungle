@@ -5,6 +5,7 @@
 	var direction = 1;
 	var speed = 10;
 	
+
 	//set size
 	creature.size({width: 286, height: 236});
 
@@ -13,7 +14,8 @@
 
 	//set up metadata
 	creature.data({
-		'species': 'elephant'
+		'species': 'elephant',
+		'name': 'Elephant'
 	});
 
 	//create canvas element
@@ -31,6 +33,9 @@
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.drawImage(img, 0, 0);	
 	}
+	
+	
+	jj.chat("Hello everyone!", creature);
 
 	// the div element for the creature.
 	var element = creature.el;
@@ -71,6 +76,7 @@
 		{
 			direction = 1;
 			flip(1);
+			jj.chat("Weeeeeeeee!", creature);
 		}
 
 		pos.left += direction * speed;
