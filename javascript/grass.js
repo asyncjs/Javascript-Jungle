@@ -61,10 +61,25 @@ jj.createCreature('grass', function (layer) {
 
   layer.length = function () {
     return curGrowth;
-  }
-
+  };
+  jj.bind('grow',function() {
+    if(curGrowth > h) {
+      //game over man, game over.
+      var canvas = document.createElement('canvas');
+      canvas.className = 'full front';
+      canvas.width = w;
+      canvas.height = h;
+      jj.jQuery('div#jungle').append(canvas);
+      context = canvas.getContext('2d');
+      context.fillStyle    = 'red';
+      context.font = "bold 50px 'OCR A Std'";
+      context.fillText("Game Over", w/2-150,h/2);
+    }
+    
+  });
   layer.eat = function () {
     if(curGrowth>20) {
+      //find intersection of the caller
       curGrowth -= 20;
       grass.animate({path: gen_path(curGrowth)}, 1000);
       grass2.animate({path: gen_path(curGrowth-60,10)}, 1000);

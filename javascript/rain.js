@@ -31,18 +31,19 @@
       context = [];
       for (ly = 0; ly <= 2; ly++) {
         canvas = document.createElement('canvas');
-        canvas.className = "rain";
+        canvas.className = "full";
         canvas.width = ws.width;
         canvas.height = ws.height;
         layer.el.append(canvas);
         context[ly] = canvas.getContext('2d');
       }
       jj.bind('clock', function(h, m) {
-        if (raining) {
+        if (raining && $rnd(5) === 1) {
           return context[2].drawImage(droplet[1 + $rnd(2)], $rnd(ws.width), $rnd(ws.height), 30, 30);
         }
       });
       jj.chat("And the heavens open...", layer);
+      jj.trigger('rain:start', layer);
       raining = 1;
       $rl = function(cx, skew, sh, cl) {
         var $anim, x, _ref;
@@ -73,6 +74,7 @@
         var cx, _i, _len, _results;
         raining = 0;
         jj.chat("Deluge over", layer);
+        jj.trigger('rain:stop', layer);
         _results = [];
         for (_i = 0, _len = context.length; _i < _len; _i++) {
           cx = context[_i];
