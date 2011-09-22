@@ -30,10 +30,10 @@
                 "https://raw.github.com/gist/1208781/", // angrybird @rakugojon
                 "creatures/lion/lion.js", 				// pete goodman - @thegingerbloke
                 "creatures/pavilion-crab/pavilion-crab.js",	// joseph steiner - 
+                "creatures/hippoBee/hippoBee.js"    //riccardo - marco 
 				
 				// * PUT YOUR DEV CREATURE SCRIPT HERE *
 				// "creatures/mycreature.js"
-                                "creatures/lion/hippoBee.js"    //riccardo - marco 
               );
             }
         },
