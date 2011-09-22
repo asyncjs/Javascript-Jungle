@@ -2,11 +2,11 @@ jj.createCreature "invader", (invader) ->
   PIXEL     = 10
   canvas    = document.createElement "canvas"
   context   = canvas.getContext "2d"
-  width     = canvas.width  = 11 * SCALE
-  height    = canvas.height = 11 * SCALE
+  width     = canvas.width  = 11 * PIXEL
+  height    = canvas.height = 11 * PIXEL
   direction = 1
   world     = jj.size()
-  top       = 5 * SCALE
+  top       = 5 * PIXEL
   left      = 0
 
   invader.size width: width, height: height
@@ -28,7 +28,7 @@ jj.createCreature "invader", (invader) ->
 
   invader1.split(/\n/).forEach (pixel, row) ->
     pixel.split('').forEach (active, col) ->
-      context.fillRect col * SCALE, row * SCALE, SCALE, SCALE if active == 'x'
+      context.fillRect col * PIXEL, row * PIXEL, PIXEL, PIXEL if active == 'x'
 
   jj.bind "clock", (hour, minute) ->
     left += (20 * direction)

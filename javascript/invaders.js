@@ -4,11 +4,11 @@
     PIXEL = 10;
     canvas = document.createElement("canvas");
     context = canvas.getContext("2d");
-    width = canvas.width = 11 * SCALE;
-    height = canvas.height = 11 * SCALE;
+    width = canvas.width = 11 * PIXEL;
+    height = canvas.height = 11 * PIXEL;
     direction = 1;
     world = jj.size();
-    top = 5 * SCALE;
+    top = 5 * PIXEL;
     left = 0;
     invader.size({
       width: width,
@@ -25,7 +25,7 @@
     invader1.split(/\n/).forEach(function(pixel, row) {
       return pixel.split('').forEach(function(active, col) {
         if (active === 'x') {
-          return context.fillRect(col * SCALE, row * SCALE, SCALE, SCALE);
+          return context.fillRect(col * PIXEL, row * PIXEL, PIXEL, PIXEL);
         }
       });
     });
