@@ -14,7 +14,8 @@
         "grass.js",
         "rain.js",
         "atmosphere.js",
-        
+        "invaders.js",
+
         function(){
             // Creatures from the community
             if (!hasSearchParam("dev")){
