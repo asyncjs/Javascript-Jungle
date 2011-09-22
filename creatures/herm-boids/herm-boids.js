@@ -193,12 +193,13 @@
           //layer.position({left: lim(pos.x % jj.size().width, 0,jj.size().width) , top: lim(pos.y % jj.size().height, 0, jj.size().height)});
 
         });
-        layer.bind('eat', function () {
+        layer.eat = function () {
           boid.eaten = new Date().getTime();
           jj.chat("Oh noes! I just got eaten :(", layer);
           boid.y = 0;
-        });;
-
+          return 4;
+        };
+        layer.bind('eat', layer.eat); 
       });
     })();
   }
