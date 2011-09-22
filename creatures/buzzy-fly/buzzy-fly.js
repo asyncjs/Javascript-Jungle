@@ -53,7 +53,7 @@ jj.createCreature('buzzy-fly', function (creature) {
 		if (leftPos < -100)
 			leftPos = -100;
 		if (leftPos > worldSize.width + 100)
-			leftPos = wolrdSize.width + 100;
+			leftPos = worldSize.width + 100;
 		// Draw
 		creature.position({top: topPos, left: leftPos});
 	});
