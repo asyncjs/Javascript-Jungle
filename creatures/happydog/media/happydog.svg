@@ -2,38 +2,40 @@
 <!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="296px" height="225px" viewBox="0 0 296 225" enable-background="new 0 0 296 225" xml:space="preserve">
-<path fill="#FF89D7" d="M72.816,136.243c0-13.521,10.938-24.482,24.432-24.482h106.565c13.492,0,24.432,10.962,24.432,24.482v19.893
-	c0,13.521-10.939,24.482-24.432,24.482H97.248c-13.493,0-24.432-10.962-24.432-24.482V136.243z"/>
-<path fill="none" stroke="#7A80FF" stroke-width="5" stroke-miterlimit="10" d="M72.816,136.243
-	c0-13.521,10.938-24.482,24.432-24.482h106.565c13.492,0,24.432,10.961,24.432,24.482v19.893c0,13.521-10.939,24.482-24.432,24.482
-	H97.248c-13.493,0-24.432-10.962-24.432-24.482V136.243z"/>
-<polygon fill="#FF89D7" points="242.757,56.195 289.827,82.905 271.848,126.124 213.666,126.124 195.688,82.905 "/>
-<polygon fill="none" stroke="#7A80FF" stroke-width="5" stroke-miterlimit="10" points="242.757,56.195 289.827,82.905 
-	271.848,126.124 213.666,126.124 195.688,82.905 "/>
-<ellipse fill="#FF89D7" cx="282.537" cy="45.083" rx="10.594" ry="11.113"/>
-<ellipse fill="none" stroke="#7A80FF" stroke-width="5" stroke-miterlimit="10" cx="282.537" cy="45.083" rx="10.594" ry="11.113"/>
-<path fill="#FF89D7" d="M276.132,51.35c-15.09,15.222-12.031,16.957-12.031,16.957"/>
-<path fill="none" stroke="#7A80FF" stroke-width="5" stroke-miterlimit="10" d="M276.132,51.35
-	c-15.09,15.222-12.031,16.957-12.031,16.957"/>
-<rect x="90.449" y="180.618" fill="#FF89D7" width="20.637" height="41.356"/>
-<rect x="90.449" y="180.618" fill="none" stroke="#7A80FF" stroke-width="5" stroke-miterlimit="10" width="20.637" height="41.356"/>
-<rect x="178.61" y="180.618" fill="#FF89D7" width="20.637" height="41.356"/>
-<rect x="178.61" y="180.618" fill="none" stroke="#7A80FF" stroke-width="5" stroke-miterlimit="10" width="20.637" height="41.356"/>
-<path fill="#FF89D7" d="M80.379,117.27c-5.787-8.77-22.755-37.312-19.007-49.046c1.36-4.258,17.423-2.899,13.949-11.591
-	c-0.813-2.036-18.227-0.478-20.961-1.025c-13.868-2.776-34.82-17.114-42.867-28.633C-15.336-11.435,58.534,7.881,12.855,7.881"/>
-<path fill="none" stroke="#7A80FF" stroke-width="5" stroke-miterlimit="10" d="M80.379,117.27
-	c-5.787-8.77-22.755-37.312-19.007-49.046c1.36-4.258,17.423-2.899,13.949-11.591c-0.813-2.036-18.227-0.478-20.961-1.025
-	c-13.868-2.776-34.82-17.114-42.867-28.633C-15.336-11.435,58.534,7.881,12.855,7.881"/>
+	 width="171.776px" height="130.126px" viewBox="0 0 171.776 130.126" enable-background="new 0 0 171.776 130.126"
+	 xml:space="preserve">
+<path fill="#FF89D7" stroke="#8C8C8C" d="M40.772,79.175c0-8.035,6.454-14.551,14.415-14.551h62.868
+	c7.96,0,14.415,6.516,14.415,14.551v11.822c0,8.036-6.454,14.551-14.415,14.551H55.187c-7.96,0-14.415-6.516-14.415-14.551V79.175z"
+	/>
+<path fill="none" stroke="#8C8C8C" stroke-miterlimit="10" d="M40.772,79.175c0-8.035,6.454-14.551,14.415-14.551h62.868
+	c7.96,0,14.415,6.516,14.415,14.551v11.822c0,8.036-6.454,14.551-14.415,14.551H55.187c-7.96,0-14.415-6.516-14.415-14.551V79.175z"
+	/>
+<polygon fill="#FF89D7" stroke="#8C8C8C" points="141.031,31.6 168.8,47.475 158.193,73.161 123.869,73.161 113.262,47.475 "/>
+<polygon fill="none" stroke="#8C8C8C" stroke-miterlimit="10" points="141.031,31.6 168.8,47.475 158.193,73.161 123.869,73.161 
+	113.262,47.475 "/>
+<ellipse fill="#FF89D7" stroke="#8C8C8C" cx="164.499" cy="24.996" rx="6.25" ry="6.604"/>
+<ellipse fill="#FF89D7" stroke="#8C8C8C" stroke-miterlimit="10" cx="164.499" cy="24.996" rx="6.25" ry="6.604"/>
+<path fill="#FF89D7" stroke="#8C8C8C" d="M160.721,28.721c-8.902,9.047-7.098,10.078-7.098,10.078"/>
+<path fill="none" stroke="#8C8C8C" stroke-miterlimit="10" d="M160.721,28.721c-8.902,9.047-7.098,10.078-7.098,10.078"/>
+<rect x="51.176" y="105.548" fill="#FF89D7" stroke="#8C8C8C" width="12.175" height="24.578"/>
+<rect x="51.176" y="105.548" fill="none" stroke="#8C8C8C" stroke-miterlimit="10" width="12.175" height="24.578"/>
+<rect x="103.187" y="105.548" fill="#FF89D7" stroke="#8C8C8C" width="12.176" height="24.578"/>
+<rect x="103.187" y="105.548" fill="none" stroke="#8C8C8C" stroke-miterlimit="10" width="12.176" height="24.578"/>
+<path fill="#FF89D7" stroke="#8C8C8C" d="M45.234,67.897C41.82,62.687,31.81,45.723,34.021,38.75
+	c0.803-2.531,10.279-1.723,8.229-6.889c-0.479-1.21-10.753-0.284-12.365-0.609c-8.182-1.65-20.543-10.171-25.29-17.017
+	C-11.233-8.594,32.347,2.886,5.398,2.886"/>
+<path fill="none" stroke="#8C8C8C" stroke-miterlimit="10" d="M45.234,67.897C41.82,62.687,31.81,45.723,34.021,38.75
+	c0.803-2.531,10.279-1.723,8.229-6.889c-0.479-1.21-10.753-0.284-12.365-0.609c-8.182-1.65-20.543-10.171-25.29-17.017
+	C-11.233-8.594,32.347,2.886,5.398,2.886"/>
 <g>
 	<defs>
-		<rect id="SVGID_1_" x="76.4" y="131.724" width="167.903" height="37.494"/>
+		<rect id="SVGID_1_" x="40.226" y="77.147" width="96.782" height="23.809"/>
 	</defs>
 	<clipPath id="SVGID_2_">
 		<use xlink:href="#SVGID_1_"  overflow="visible"/>
 	</clipPath>
 	<g clip-path="url(#SVGID_2_)">
-		<text transform="matrix(0.9979 0 0 1 81.3833 150.4277)" fill="#00FCFF" font-family="'Helvetica'" font-size="18.6068">I am a happy dog</text>
+		<text transform="matrix(0.9058 0 0 1 44.7422 89.0508)" fill="#00FCFF" font-family="'Helvetica'" font-size="15.6114"> Happy Dog</text>
 	</g>
 </g>
 </svg>

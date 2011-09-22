@@ -1,9 +1,11 @@
+//older stroke color 7A80FF
+
 jj.createCreature('happydog', function (creature) {
     var el = creature.el,
         world   = jj.size(),
         bouncy = 0;
-        dog_height = 225,
-        dog_width = 296
+        dog_height = 130,
+        dog_width = 171
         floor = world.height-dog_height
         top = floor,
         left = 50,
