@@ -2,9 +2,12 @@ jj.createCreature('happydog', function (creature) {
     var el = creature.el,
         world   = jj.size(),
         bouncy = 0;
-        floor = world.height-200
         dog_height = 225,
         dog_width = 296
+        floor = world.height-dog_height
+        top = floor,
+        left = 50,
+        edge = 50
     
     creature.size({ width: dog_width, height: dog_height});
         // canvas = document.createElement('canvas'),
@@ -15,23 +18,43 @@ jj.createCreature('happydog', function (creature) {
     creature.el.css('background', 'url(./creatures/happydog/media/happydog.svg)');
     // el.append(canvas)
     // el.append("<img id=\"happyimg\" src=\"creatures/happydog/media/happydog.svg\">");
-    creature.position({top: floor, left: "50px"});
+    creature.position({top: top, left: left});
+    right_to_left = false;
     jj.bind('tick', function () {
-        if (creature.position().left > world.width) {
-            creature.position({ left: '-150px'})
+        if (left > (world.width-(edge+dog_width))) {
+            // creature.position({ left: -150})
+            // left = 150;
+            right_to_left = true;
+            left = left -10;
+            creature.position({left:left-10});
+        }
+        else if (left < edge)
+        {
+            right_to_left = false;
+            left = left +10;
+            creature.position({left:left+10});
         }
         else
         {
-            creature.position({ left: '+= 10px'});
+            if (right_to_left) {
+                left = left - 10;
+                creature.position({ left: left-10});
+            }
+            else {
+                creature.position({ left: left+10});
+                left += 10;
+            }
         }
         if (bouncy > 50)
         {
-            creature.position({ top: floor})
+            top = floor;
+            creature.position({ top: floor});
             bouncy = 0;
         }
         else
         {
             bouncy += 4;
+            top = floor-bouncy;
             creature.position({top: floor-bouncy});
         }
      });
