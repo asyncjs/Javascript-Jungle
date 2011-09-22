@@ -57,6 +57,14 @@ div.floor {
   background-image: -moz-linear-gradient(270deg, rgba(28, 12, 2, 0) 0%, #a45607 100%);
 }
 
+canvas.rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+}
 div.creature {
   position: absolute;
 }

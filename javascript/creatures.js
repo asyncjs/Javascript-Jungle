@@ -9,10 +9,11 @@
     jj.load(
         "clock.js",
         "chat.js",
-        "grass.js",
-        "tree.js",
-        "atmosphere.js",
         "stars.js",
+        "tree.js",
+        "grass.js",
+        "rain.js",
+        "atmosphere.js",
         
         function(){
             // Creatures from the community
