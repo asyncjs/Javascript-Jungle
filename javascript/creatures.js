@@ -27,7 +27,8 @@
                 "creatures/pavilion-crab/pavilion-crab.js", // joseph steiner - 
                 "creatures/hippoBee/hippoBee.js",           // riccardo - marco 
                 "creatures/elephant/elephant.js",           // piotr rochala - @rochal
-                "creatures/buzzy-fly/buzzy-fly.js"          // Fly - Spike & Shanee
+                "creatures/buzzy-fly/buzzy-fly.js",          // Fly - Spike & Shanee
+				"creatures/garden/garden.js"          		// garden - @skymook
                 
                 // ,"creatures/mycreature/mycreature.js"    // * ADD YOUR FINISHED CREATURE LIKE THIS EXAMPLE */
               ]
