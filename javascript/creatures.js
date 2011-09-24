@@ -44,6 +44,6 @@
     	
     	// 4) Open index.html?dev in your browser to remove all other non-core creatures from the jungle.
     	
-    	/* 5) Once ready to add to the public repository, undo any changes you've changed to this file, then add your main js file's URL to the "Community creatures" block above. */
+    	/* 5) Once ready to add to the public repository, undo any changes you've changed to this file, then add your main js file's URL to the "Community creatures" block above. If you haven't yet been added to the GitHub team for the repository then send us a ping. e.g. @asyncjs on Twitter or email p@dharmafly.com */
     );
 }());
