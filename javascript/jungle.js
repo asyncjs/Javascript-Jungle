@@ -163,6 +163,12 @@
       
       // Set a ticker going
       return this.start();
+    },
+    
+    hasSearchParam: function(param, value){
+        var pattern = "^[\?&]" + param + 
+            (typeof value === "undefined" ? "($|[=&])" : "=" + value + "($|&)");
+        return (new RegExp(pattern)).test(window.location.search);
     }
   });
   
