@@ -1,7 +1,9 @@
 jj.createCreature('clock', function (layer) {
-  var SPEED = 5,
+  var RENDER_FREQ = 10, // render clock every n frames
+      SPEED = 5,
       hours = 0,
       minutes = 0,
+      minutesAccurate = 0,
       events = {
         '0':  'midnight',
         '6':  'morning',
@@ -12,15 +14,31 @@ jj.createCreature('clock', function (layer) {
         '21': 'nighttime'
       },
       data = layer.data(),
-      el = jj.jQuery("span#time");
+      el = jj.jQuery("span#time"),
+      cycleCount = 0;
 
   layer.el.remove();
   layer.data({speed: SPEED, background: true});
 
   // Create a clock that moves six times faster than normal.
   // eg. 10 mins = 1 hour.
-  jj.bind('tick', function (frame) {
-    if (frame % data.speed === 0) {
+  jj.bind('tick', function (deltaT) {
+    minutesAccurate += (deltaT / 1000) * data.speed;
+    
+    if (minutesAccurate >= 60) {
+      minutesAccurate = minutesAccurate % 60;
+      hours += 1; // for large delays, there may be a bigger component to add to `hours`
+    }
+    
+    minutes = ~~(minutesAccurate);
+    
+    if (hours >= 24) {
+      hours = 0;
+    }
+  
+    if (cycleCount++ > RENDER_FREQ) {
+      cycleCount = 0;
+    
       // Update clock element
       el.text(
         (hours < 10 ? '0' + hours : hours) + ":" +
@@ -31,16 +49,6 @@ jj.createCreature('clock', function (layer) {
       
       if (minutes === 0 && events[hours]) {
         jj.trigger(events[hours]);
-      }
-
-      minutes += 1;
-      
-      if (minutes >= 60) {
-        hours  += 1;
-        minutes = 0;
-      }
-      if (hours >= 24) {
-        hours = 0;
       }
     }
   });
