@@ -4,6 +4,7 @@
   var $ = jQuery.noConflict(true),
       Events = Broadcast.noConflict(),
       jungle = $('#jungle'),
+      jungleEl = jungle[0],
       creatures = {}, jj = {},
       
       // File that contains a list of urls, passed to jj.load
@@ -11,14 +12,15 @@
       CREATURE_URL_LIST = false,
       
       // The number of frames/second that the "tick" event will fire.
-      FRAMERATE = 25;
+      FRAMERATE = 25,
+      
+      // If a frame is rendered more than this number of milliseconds after the previous one, then ditch the frame
+      FRAME_CUTOFF = 100;
    
   /////
 
   // Create the global jungle object.
-  window.jj = jj = $.extend({}, Events, {
-    fps: FRAMERATE,
-    
+  window.jj = jj = $.extend({}, Events, {    
     // jQuery object
     jQuery: $,
   
@@ -112,18 +114,59 @@
     
     isRunning: false,
     
-    _tickRef: null,    
+    _tickRef: null,
+    
+    // Derived from https://gist.github.com/1114293#file_anim_loop_x.js
+    // See http://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
     _tick: (function(){
-      var frame = 0;
-      
-      return function(){
-        jj.trigger("tick", frame);
+        // feature testing
+        var raf = window.mozRequestAnimationFrame    ||
+                  window.webkitRequestAnimationFrame ||
+                  window.msRequestAnimationFrame     ||
+                  window.oRequestAnimationFrame;
 
-        frame = (frame !== jj.fps) ? frame + 1 : 0;
-        // Using setTimeout instead of setInterval to allow in-runtime fps-bending
-        jj._tickRef = window.setTimeout(jj._tick, 1000 / jj.fps);
-      };
-    }()),
+        function animLoop(){
+            var lastFrame = +new Date;
+            
+            function loop(now) {
+                var deltaT;
+            
+                if (jj.isRunning){
+                  raf ?
+                    raf(loop, jungleEl) :
+                    // fallback to setTimeout
+                    jj._tickRef = window.setTimeout(loop, 1000 / FRAMERATE);
+                    
+                  // Make sure to use a valid time, since:
+                  // - Chrome 10 doesn't return it at all
+                  // - setTimeout returns the actual timeout
+                  now = now && now > 1E4 ? now : +new Date;
+                  deltaT = now - lastFrame;
+                  
+                  lastFrame = now;
+                  //jj.fps = 1000 / deltaT;
+                  
+                  // do not render frame when deltaT is too high
+                  if (deltaT < FRAME_CUTOFF) {
+                    jj.trigger("tick", deltaT, now);
+                  }
+                }
+            }
+            
+            loop();
+        }
+        
+        return animLoop;
+        }()),
+
+        // Usage
+        /* animLoop(function( deltaT, now ) {
+            // rendering code goes here
+            // return false; will stop the loop
+        ...
+        // optional 2nd arg: elem containing the animation
+        }, animWrapper );
+        */
     
     start: function(){
       this.isRunning = true;
