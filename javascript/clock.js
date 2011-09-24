@@ -1,9 +1,9 @@
 jj.createCreature('clock', function (layer) {
-  var RENDER_FREQ = 10, // render clock every n frames
-      SPEED = 5,
+  var SPEED = 5,
       hours = 0,
       minutes = 0,
       minutesAccurate = 0,
+      minutesCache,
       events = {
         '0':  'midnight',
         '6':  'morning',
@@ -14,8 +14,7 @@ jj.createCreature('clock', function (layer) {
         '21': 'nighttime'
       },
       data = layer.data(),
-      el = jj.jQuery("span#time"),
-      cycleCount = 0;
+      el = jj.jQuery("span#time");
 
   layer.el.remove();
   layer.data({speed: SPEED, background: true});
@@ -32,13 +31,11 @@ jj.createCreature('clock', function (layer) {
     
     minutes = ~~(minutesAccurate);
     
-    if (hours >= 24) {
-      hours = 0;
-    }
-  
-    if (cycleCount++ > RENDER_FREQ) {
-      cycleCount = 0;
-    
+    if (minutesCache !== minutes){
+      if (hours >= 24) {
+        hours = 0;
+      }
+      
       // Update clock element
       el.text(
         (hours < 10 ? '0' + hours : hours) + ":" +
@@ -50,6 +47,8 @@ jj.createCreature('clock', function (layer) {
       if (minutes === 0 && events[hours]) {
         jj.trigger(events[hours]);
       }
+      
+      minutesCache = minutes;
     }
   });
   
