@@ -128,10 +128,12 @@ jj.createCreature("ufo", function (creature) {
             targetName = target.name();
             state = CHASE;
         }
+        /*
         else if (typeof other.name !== "function") {
             console.log(other);
             debugger;
         }
+        */
     });
     
     jj.bind("midnight", reset);
