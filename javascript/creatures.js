@@ -13,22 +13,21 @@
             null :
             [
                 // COMMUNITY CREATURES
-                "https://raw.github.com/gist/1204436/",     // triangula
-                "https://raw.github.com/gist/1204505/",     // sun
-                "https://raw.github.com/gist/1204620/",     // butterfly_colmjude.js
-                "https://raw.github.com/gist/1204683/",     // happygiraffe-snowman
-                "https://raw.github.com/gist/1204932/",     // toucan @rakugojon
-                "https://raw.github.com/gist/1208781/",     // angrybird @rakugojon
-                
+                "creatures/triangula/triangula.js",         // triangula
+                "creatures/sun/sun.js",                     // sun - hugheth
+                "creatures/butterfly/butterfly.js",         // butterfly - colmjude
+                "creatures/snowman/snowman.js",             // snowman - happygiraffe
+                "creatures/toucan/toucan.js",               // toucan - @rakugojon
+                "creatures/angry-bird/angry-bird.js",       // angrybird - @rakugojon
                 "creatures/happydog/happydog.js",           // happydog
-                "creatures/herm-boids/herm-boids.js",       // @almostobsolete - flocking birds (herm-boid)
-                "creatures/ufo/ufo.js",                     // ufo @JimPurbrick
-                "creatures/lion/lion.js",                   // pete goodman - @thegingerbloke
-                "creatures/pavilion-crab/pavilion-crab.js", // joseph steiner - 
-                "creatures/hippoBee/hippoBee.js",           // riccardo - marco 
-                "creatures/elephant/elephant.js",           // piotr rochala - @rochal
-                "creatures/buzzy-fly/buzzy-fly.js",          // Fly - Spike & Shanee
-				"creatures/garden/garden.js"          		// garden - @skymook
+                "creatures/herm-boids/herm-boids.js",       // flocking birds (herm-boid) - @almostobsolete
+                "creatures/ufo/ufo.js",                     // ufo - @JimPurbrick
+                "creatures/lion/lion.js",                   // lion - @thegingerbloke
+                "creatures/pavilion-crab/pavilion-crab.js", // pavilion crab - joseph steiner - 
+                "creatures/hippoBee/hippoBee.js",           // hippoBee - riccardo & marco 
+                "creatures/elephant/elephant.js",           // Elephant - piotr rochala - @rochal
+                "creatures/buzzy-fly/buzzy-fly.js",         // Fly - Spike & Shanee
+                "creatures/garden/garden.js"                // garden - @skymook
                 
                 // ,"creatures/mycreature/mycreature.js"    // * ADD YOUR FINISHED CREATURE LIKE THIS EXAMPLE */
               ]
@@ -41,10 +40,10 @@
         // ,"creatures/mycreature/mycreature.js"
         
         /* 3) Optionally, uncomment the following line, for when your creature is under development. It passes an option to avoid browser-caching issues. */
-    	// ,{noCache:true"}
-    	
-    	// 4) Open index.html?dev in your browser to remove all other non-core creatures from the jungle.
-    	
-    	/* 5) Once ready to add to the public repository, undo any changes you've changed to this file, then add your main js file's URL to the "Community creatures" block above. If you haven't yet been added to the GitHub team for the repository then send us a ping. e.g. @asyncjs on Twitter or email p@dharmafly.com */
+      // ,{noCache:true"}
+      
+      // 4) Open index.html?dev in your browser to remove all other non-core creatures from the jungle.
+      
+      /* 5) Once ready to add to the public repository, undo any changes you've changed to this file, then add your main js file's URL to the "Community creatures" block above. If you haven't yet been added to the GitHub team for the repository then send us a ping. e.g. @asyncjs on Twitter or email p@dharmafly.com */
     );
 }());
